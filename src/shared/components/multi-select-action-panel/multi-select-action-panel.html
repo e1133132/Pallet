@@ -1,0 +1,11 @@
+<div class="msap" [class.hide-panel]="!expanded" padding-right>
+  <ng-content></ng-content>
+
+  <div class="show-more-wrapper" *ngIf="buttons.length > 0">
+    <button ion-button clear icon-only
+            (click)="onMoreActions($event)">
+      <ion-icon name="more"></ion-icon>
+    </button>
+  </div>
+
+</div>

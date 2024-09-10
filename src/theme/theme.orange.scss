@@ -1,0 +1,223 @@
+.orange-theme {
+
+  $theme-primary: #FFC04C;
+  $theme-primary-light: #FFDFA5;
+  $theme-primary-accent: #4C8BFF;
+  $theme-contrast: #03a9f4;
+  $theme-forecolor: #fff;
+  $theme-black: #000;
+
+  //ion-menu {
+  //  background-color: $theme-primary-light;
+  //}
+
+  ion-app {
+       background-color: $theme-primary-light !important;
+     }
+
+
+
+  ion-content {
+    background-color: $theme-primary-light !important;
+
+    button.button-clear {
+      color: $theme-black;
+    }
+    button.danger {
+    }
+    button.secondary {
+    }
+    button.button-default {
+      color: $theme-forecolor;
+      background-color: $theme-primary;
+      &:hover {background-color: $theme-primary}
+    }
+
+    .checkbox-checked {
+      background-color: $theme-primary;
+      border-color: $theme-primary;
+      color: $theme-black;
+    }
+
+    ms-action-panel{
+      .msap{
+        background-color: $theme-contrast;
+        color: $theme-forecolor;
+      }
+
+      button.button-clear{
+        color: $theme-forecolor;
+      }
+      button.button-default{
+        color: $theme-forecolor;
+        background-color: $theme-primary;
+      }
+    }
+
+    ion-spinner * {
+      stroke: $theme-forecolor;
+    }
+
+    .update-profile-modal .modal-wrapper {
+      min-height: 200px;
+      height: auto;
+      //overflow: auto;
+      background-color: $theme-primary-light !important;
+    }
+
+  }
+
+  ion-picker-cmp {
+    background-color: $theme-primary-light !important;
+  }
+
+
+
+  .toolbar-title {
+    color: $theme-forecolor;
+  }
+
+  .header .toolbar-background {
+    background-color: $theme-primary;
+  }
+
+  .toolbar button {
+    color: $theme-forecolor;
+  }
+
+  .card {
+    box-shadow: none !important;
+
+    .card-header {
+      background-color: $theme-primary;
+
+      .card-title{
+        color: #444;
+      }
+    }
+
+    .details {
+      .item{
+        box-shadow: none !important;
+        input{
+          color: $theme-forecolor;
+        }
+        ion-label{
+          color: $theme-primary;
+        }
+      }
+      .item, .item-has-value, .item-input-has-value, .item-input-has-focus, .item-has-focus {
+        border-bottom: 1px solid $theme-primary !important;
+      }
+      .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child, .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child{
+        border-bottom: 1px solid $theme-primary;
+        box-shadow: none;
+      }
+    }
+
+  }
+
+  .item-radio-checked.item-md ion-label {
+    color: $theme-primary;
+  }
+  .radio-md .radio-checked{
+    border-color: $theme-primary;
+    .radio-inner{
+      background-color: $theme-primary;
+    }
+  }
+  .item-md ion-icon[item-left], .item-md ion-icon[item-right], .item-md ion-icon[item-start], .item-md ion-icon[item-end]{
+    color: $theme-primary;
+  }
+  .toggle-md.toggle-checked .toggle-icon{
+    background-color: $theme-primary-light;
+    .toggle-inner{
+      background-color: $theme-primary;
+    }
+  }
+
+    #bottom-bulk-action-panel{
+      position: fixed;
+      width: 100%;
+      left: 0;
+      bottom:0;
+      //position: fixed;
+      //left: 0px;
+      //right: 0px;
+      //bottom: 0px;
+      //top: auto;
+      background-color: #FFC04C !important;
+
+      padding: 0;
+      margin: 0;
+      color: black !important;
+
+      -webkit-transition: transform 0.3s;
+      -moz-transition: transform 0.3s;
+      -ms-transition: transform 0.3s;
+      -o-transition: transform 0.3s;
+      transition: transform 0.3s;
+
+      p {
+        padding-left: 30px;
+      }
+    }
+
+
+  //
+
+
+//  ion-content {
+//    background-color: #FFDFA5 !important;
+//  }
+//
+//  .toolbar-background {
+//    background-color:  #FFC04C !important;
+//  }
+//
+//  ion-card-header{
+//    background-color: #FFC04C !important;
+//  }
+//
+//  .selected-item {
+//    color: #FFC04C !important;
+//  }
+//
+//  //button {
+//  //  background-color: #FFC04C !important;
+//  //  color: #000 !important;
+//  //}
+//
+//  .table-data.selectable-table-data {
+//    color: #000 !important;
+//  }
+//
+//  #bottom-bulk-action-panel{
+//    position: fixed;
+//    width: 100%;
+//    left: 0;
+//    bottom:0;
+//    //position: fixed;
+//    //left: 0px;
+//    //right: 0px;
+//    //bottom: 0px;
+//    //top: auto;
+//    background-color: #FFC04C !important;
+//
+//    padding: 0;
+//    margin: 0;
+//    color: black !important;
+//
+//    -webkit-transition: transform 0.3s;
+//    -moz-transition: transform 0.3s;
+//    -ms-transition: transform 0.3s;
+//    -o-transition: transform 0.3s;
+//    transition: transform 0.3s;
+//
+//    p {
+//      padding-left: 30px;
+//    }
+//  }
+
+
+}

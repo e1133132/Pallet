@@ -1,0 +1,33 @@
+<!-- Generated template for the CustomerModalMonthlySummaryComponent component -->
+
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <ion-label style="font-size: large" text-center *ngIf="settings.getDeviceSize()=='lg' || settings.getDeviceSize()=='md'">
+    Generate Monthly Summary Report for {{customer.Customer_Name}}
+  </ion-label>
+  <ion-label style="font-size: medium" text-center *ngIf="settings.getDeviceSize()=='sm' || settings.getDeviceSize()=='xs'">
+    Generate Monthly Summary Report <br>for {{customer.Customer_Name}}
+  </ion-label>
+</ion-header>
+
+<ion-content color="secondary" padding>
+  <ion-row>
+    <ion-col>
+      <ion-label style="font-size: medium" text-right>Please select month: </ion-label>
+    </ion-col>
+    <ion-col>
+        <ion-datetime style="font-size: medium" #chosenDate displayFormat="MMMM-YYYY" [(ngModel)]="dt"></ion-datetime>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col text-center>
+        <button item-right ion-button (click)="generateXLMonthlySummaryReport(dt)">Generate Excel File</button>
+    </ion-col>
+    <ion-col text-center>
+    <button ion-button item-left (click)="close()">Cancel</button>
+  </ion-col>
+  </ion-row>
+
+</ion-content>
+

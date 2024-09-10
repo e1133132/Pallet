@@ -1,0 +1,451 @@
+<!--
+  Generated template for the PalletProfileMgmtPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <ion-navbar color="primary">
+    <ion-title>Pallet Profile: {{palletProfile.Pallet_Type}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <expandable-card [initialExpand]="false" [expandHeight]="4500">
+
+      <div card-title>
+          <ion-col col-1>
+            <ion-icon ios="ios-color-wand" md="md-color-wand"></ion-icon>
+          </ion-col>
+          <ion-col>
+            Edit Profile
+          </ion-col>
+
+      </div>
+
+      <div table-data>
+
+        <form [formGroup]="editPalletProfileForm" (ngSubmit) = "editPalletProfile(editPalletProfileForm.value)">
+
+         <ion-input type = "text" formControlName="Pallet_Profile_ID" hidden></ion-input>
+
+            <ion-item>
+              <ion-label stacked>Pallet Type</ion-label>
+              <ion-input type = "text" formControlName="Pallet_Type"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Size</ion-label>
+              <ion-input type = "text" formControlName="Size"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Dynamic Load</ion-label>
+              <ion-input type = "text" formControlName="Dynamic_Load"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Static Load</ion-label>
+              <ion-input type = "text" formControlName="Static_Load"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Functions</ion-label>
+              <ion-input type = "text" formControlName="Functions"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Quantity</ion-label>
+              <ion-input disabled type = "number" formControlName="Qty"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Spec</ion-label>
+              <ion-input type = "text" formControlName="Spec"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Marking</ion-label>
+              <ion-input type = "text" formControlName="Marking"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Painting</ion-label>
+              <ion-input type = "text" formControlName="Painting"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Remarks</ion-label>
+              <ion-input type = "text" formControlName="Remarks"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Quantity Loaned to LHP</ion-label>
+              <ion-input type = "text" formControlName="Qty_Loaned_to_LHP"></ion-input>
+            </ion-item>
+
+          <ion-row align-items-center>
+            <ion-col col-6 text-center><button ion-button [disabled]="editPalletProfileForm.invalid" type="submit">Save Changes
+            </button></ion-col>
+            <ion-col col-6 text-center><button ion-button type="button" (click)="loadForm()">Undo Changes</button></ion-col>
+          </ion-row>
+
+        </form>
+
+      </div>
+
+    </expandable-card>    <!-- Edit Pallet Profile -->
+
+    <expandable-card [initialExpand]="false" [expandHeight]="4500"
+                     [paginationData]="movementHistoryPaginationData"
+                     (changePagination)="loadOrderArrangeMovementHistoryData($event)">
+
+      <div card-title>
+          <ion-col col-1>
+            <ion-icon ios="ios-barcode" md="md-barcode"></ion-icon>
+          </ion-col>
+          <ion-col>
+            RFID Events
+          </ion-col>
+      </div>
+
+      <div secondary-data>
+        <ion-row align-items-center>
+          <ion-col col-lg-10 col-sm-4>
+            <ion-searchbar #movementHistorySearchBar (ionChange)="searchMovementHistoryData($event)" placeholder="Search Events">Search</ion-searchbar>
+          </ion-col>
+        </ion-row>
+      </div>
+
+
+      <table-row table-headers text-center>
+          <table-header col-2 name="Process" id="Process" [orderedColumn]="mhTableOrderedCol" (order)="loadOrderArrangeMovementHistoryData($event)"></table-header>
+          <table-header col-3 name="Process No" id="Process_No" [orderedColumn]="mhTableOrderedCol" (order)="loadOrderArrangeMovementHistoryData($event)"></table-header>
+          <table-header col-1 name="Location" id="Location" [orderedColumn]="mhTableOrderedCol" (order)="loadOrderArrangeMovementHistoryData($event)"></table-header>
+          <table-header col-1 name="Read Point" id="Read_Point" [orderedColumn]="mhTableOrderedCol" (order)="loadOrderArrangeMovementHistoryData($event)"></table-header>
+          <table-header col-2 name="Time" id="Time" [orderedColumn]="mhTableOrderedCol" (order)="loadOrderArrangeMovementHistoryData($event)"></table-header>
+          <table-header col-1 name="Qty" id="Qty" [orderedColumn]="mhTableOrderedCol" (order)="loadOrderArrangeMovementHistoryData($event)"></table-header>
+          <table-header col-1 name="Status" id="Status" [orderedColumn]="mhTableOrderedCol" (order)="loadOrderArrangeMovementHistoryData($event)"></table-header>
+      </table-row>
+
+      <table-row table-data text-center *ngFor="let mh of allMovementHistories, index as i" > <!--[class.selected]="isChecked(mh)"-->
+          <table-data col-2><span>{{mh.Process}}</span></table-data>
+          <table-data col-3><span>{{mh.Process_No}}</span></table-data>
+          <table-data col-1><span>{{mh.Location}}</span></table-data>
+          <table-data col-1><span>{{mh.Read_Point}}</span></table-data>
+          <table-data col-2><span>{{mh.Time | date:"dd-MM-yyyy"}}</span></table-data>
+          <table-data col-1><span>{{mh.Qty}}</span></table-data>
+          <table-data col-1><span>{{mh.Status}}</span></table-data>
+      </table-row>
+
+      <div table-mobile>
+          <ion-list>
+            <ion-item *ngFor="let mh of allMovementHistories, index as i">
+              <ion-label>
+                <h2>{{ mh.Process }}</h2>
+                <h3>{{ mh.Process_No}}</h3>
+                <p>{{mh.Status}}</p>
+              </ion-label>
+              <ion-note item-right>
+                {{mh.Time | date:"dd-MM-yyyy"}}
+              </ion-note>
+            </ion-item>
+
+          </ion-list>
+      </div>
+
+    </expandable-card>    <!-- Movement History-->
+
+    <expandable-card [initialExpand]="false" [expandHeight]="3000"
+                     [paginationData]="palletProfilePaginationData"
+                     (changePagination)="loadSearchOrderArrangeData($event)">
+
+      <div card-title>
+            <ion-label *ngIf="getDeviceSize()=='lg' || getDeviceSize()=='md'">Daily Inventory Status - Pallet</ion-label>
+            <ion-label *ngIf="getDeviceSize()=='sm' || getDeviceSize()=='xs'">Daily Pallet Inv Status</ion-label>
+      </div>
+
+      <div secondary-actions>
+        <ion-row align-items-center>
+          <ion-col col-lg-8 col-sm-2>
+            <ion-item>
+              <ion-label>Select Start Date: </ion-label>
+              <ion-datetime (ionChange)="getDailyInventoryStatus(startDate, endDate)" displayFormat="DD-MMMM-YYYY" [(ngModel)]="startDate"></ion-datetime>
+            </ion-item>
+          </ion-col>
+          <ion-col col-lg-8 col-sm-2>
+            <ion-item>
+              <ion-label>Select End Date: </ion-label>
+              <ion-datetime (ionChange)="getDailyInventoryStatus(startDate, endDate)" displayFormat="DD-MMMM-YYYY" [(ngModel)]="endDate" [min]="startDate"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <br>
+        <ion-row style="font-size: medium">
+          Pallet Inventory Report - Daily Inventory Status for {{startDate | date:"dd-MM-yyyy"}}
+        </ion-row>
+      </div>
+
+      <table-row table-headers>
+          <ion-col col-2>Date</ion-col>
+          <ion-col col-2>Inventory Qty</ion-col>
+          <ion-col col-1>Total Issued Qty</ion-col>
+          <ion-col col-1>Total Retrieve Qty</ion-col>
+          <ion-col col-1>Qty Loaned to LHP</ion-col>
+          <ion-col col-3>Total Retrieve Qty (Not Acknowledged)</ion-col>
+          <ion-col col-1>Advance Order Qty</ion-col>
+          <ion-col col-1>Advance Production Bal Qty</ion-col>
+      </table-row>
+
+      <table-row table-data> <!--[class.selected]="isChecked(mh)"-->
+          <table-data col-2><span>{{startDate | date:"dd-MM-yyyy"}}</span></table-data>
+          <table-data col-2><span>{{palletProfile.Qty}}</span></table-data>
+          <table-data col-1><span>{{totIssQty}}</span></table-data>
+          <table-data col-1><span>{{totRetQty}}</span></table-data>
+          <table-data col-1><span>{{palletProfile.Qty_Loaned_to_LHP}}</span></table-data>
+          <table-data col-3><span>{{totRetQtyNotAck}}</span></table-data>
+          <table-data col-1><span>{{totAdvOrdQty}}</span></table-data>
+          <table-data col-1><span>{{advProdBalQty}}</span></table-data>
+      </table-row>
+
+      <div table-mobile>
+        <ion-list>
+          <ion-item>
+            <ion-label>
+              <h2>Date: {{ startDate | date:"dd-MM-yyyy" }}</h2>
+              <h3>Inventory Qty: {{palletProfile.Qty}}</h3>
+              <p>Total Issued Qty: {{totIssQty}}</p>
+              <p>Total Retrieve Qty: {{totRetQty}}</p>
+              <p>Qty Loaned to LHP: {{palletProfile.Qty_Loaned_to_LHP}}</p>
+              <p>Total Retrieve Qty (Not Acknowledged): {{totRetQtyNotAck}}</p>
+              <p>Advance Order Qty: {{totAdvOrdQty}}</p>
+              <p>Advance Production Bal Qty: {{advProdBalQty}}</p>
+            </ion-label>
+          </ion-item>
+
+        </ion-list>
+      </div>
+
+    </expandable-card> <!--Daily Inventory Status - Pallet-->
+
+    <expandable-card [initialExpand]="false" [expandHeight]="3000"
+                     [paginationData]="palletProfilePaginationData"
+                     (changePagination)="loadSearchOrderArrangeData($event)">
+
+      <div card-title>
+            <ion-label *ngIf="getDeviceSize()=='lg' || getDeviceSize()=='md'">Daily Inventory Status - Issue Note</ion-label>
+            <ion-label *ngIf="getDeviceSize()=='sm' || getDeviceSize()=='xs'">Issue Note Status</ion-label>
+      </div>
+
+      <div secondary-actions>
+        <ion-row align-items-center>
+          <ion-col col-lg-8 col-sm-2>
+            <ion-item>
+              <ion-label>Select Start Date: </ion-label>
+              <ion-datetime (ionChange)="getDailyInventoryStatus(startDate, endDate)" displayFormat="DD-MMMM-YYYY" [(ngModel)]="startDate"></ion-datetime>
+            </ion-item>
+          </ion-col>
+          <ion-col col-lg-8 col-sm-2>
+            <ion-item>
+              <ion-label>Select End Date: </ion-label>
+              <ion-datetime (ionChange)="getDailyInventoryStatus(startDate, endDate)" displayFormat="DD-MMMM-YYYY" [(ngModel)]="endDate" [min]="startDate"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <br>
+      <ion-row style="font-size: medium">
+        Pallet Inventory Report - Issue Status for {{startDate | date:"dd-MM-yyyy"}}
+      </ion-row>
+    </div>
+
+      <table-row table-headers>
+          <ion-col col-2>Date</ion-col>
+          <ion-col col-2>Issue Qty</ion-col>
+          <ion-col col-4>Customer Name</ion-col>
+      </table-row>
+
+      <table-row table-data *ngFor="let iss of dailyInventoryStatusIssueList">
+          <table-data col-2><span>{{iss.Issue_Date | date:"dd-MM-yyyy"}}</span></table-data>
+          <table-data col-2><span>{{iss.Issue_Qty}}</span></table-data>
+          <table-data col-4><span>{{iss.Customer_Name}}</span></table-data>
+      </table-row>
+      <table-row table-data>
+        <table-data col-2>
+          <span>Total:</span>
+        </table-data>
+        <table-data col-2>
+          <span>{{totIssQty}}</span>
+        </table-data>
+      </table-row>
+
+      <div table-mobile>
+        <ion-list>
+          <ion-item *ngFor="let iss of dailyInventoryStatusIssueList">
+            <ion-label>
+              <h3>{{ iss.Customer_Name}}</h3>
+              <p>{{iss.Issue_Qty}}</p>
+            </ion-label>
+            <ion-note item-right>
+              {{iss.Issue_Date | date:"dd-MM-yyyy"}}
+            </ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Total: {{totIssQty}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </expandable-card> <!--Daily Inventory Status - Issue Note-->
+
+    <expandable-card [initialExpand]="false" [expandHeight]="3000"
+                     [paginationData]="palletProfilePaginationData"
+                     (changePagination)="loadSearchOrderArrangeData($event)">
+
+      <div card-title>
+            <ion-label *ngIf="getDeviceSize()=='lg' || getDeviceSize()=='md'">Daily Inventory Status - Retrieve Note</ion-label>
+            <ion-label *ngIf="getDeviceSize()=='sm' || getDeviceSize()=='xs'">Retrieve Note Status</ion-label>
+      </div>
+
+      <div secondary-actions>
+        <ion-row align-items-center>
+          <ion-col col-lg-8 col-sm-2>
+            <ion-item>
+              <ion-label>Select Start Date: </ion-label>
+              <ion-datetime (ionChange)="getDailyInventoryStatus(startDate, endDate)" displayFormat="DD-MMMM-YYYY" [(ngModel)]="startDate"></ion-datetime>
+            </ion-item>
+          </ion-col>
+          <ion-col col-lg-8 col-sm-2>
+            <ion-item>
+              <ion-label>Select End Date: </ion-label>
+              <ion-datetime (ionChange)="getDailyInventoryStatus(startDate, endDate)" displayFormat="DD-MMMM-YYYY" [(ngModel)]="endDate" [min]="startDate"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <br>
+        <ion-row style="font-size: medium">
+          Pallet Inventory Report - Retrieve Status for {{startDate | date:"dd-MM-yyyy"}}
+        </ion-row>
+      </div>
+
+      <table-row table-headers text-center>
+        <ion-col col-2>Date</ion-col>
+        <ion-col col-2>Retrieve Qty</ion-col>
+        <ion-col col-4>Customer Name</ion-col>
+      </table-row>
+
+      <table-row table-data text-center *ngFor="let rn of dailyInventoryStatusRetrieveList">
+        <table-data col-2><span>{{rn.Retrieve_Date | date:"dd-MM-yyyy"}}</span></table-data>
+        <table-data col-2><span>{{rn.Qty}}</span></table-data>
+        <table-data col-4><span>{{rn.Customer_Name}}</span></table-data>
+      </table-row>
+      <table-row>
+        <table-data col-2>
+          <span>Total:</span>
+        </table-data>
+        <table-data col-2>
+          <span>{{totRetQty}}</span>
+        </table-data>
+      </table-row>
+
+      <div table-mobile>
+        <ion-list>
+          <ion-item *ngFor="let rn of dailyInventoryStatusRetrieveList">
+            <ion-label>
+              <h3>{{ rn.Customer_Name}}</h3>
+              <p>{{rn.Qty}}</p>
+            </ion-label>
+            <ion-note item-right>
+              {{rn.Retrieve_Date | date:"dd-MM-yyyy"}}
+            </ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Total: {{totRetQty}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+
+
+    </expandable-card> <!--Daily Inventory Status - Retrieve Note-->
+
+    <expandable-card [initialExpand]="false" [expandHeight]="8000">
+
+      <div card-title>
+           <ion-label *ngIf="getDeviceSize()=='lg' || getDeviceSize()=='md'">Daily Inventory Status - Advance Order</ion-label>
+           <ion-label *ngIf="getDeviceSize()=='sm' || getDeviceSize()=='xs'">Daily Adv. Order Status</ion-label>
+      </div>
+
+      <div secondary-actions>
+        <ion-row align-items-center>
+          <ion-col col-lg-8 col-sm-2>
+            <ion-item>
+              <ion-label>Select Start Date: </ion-label>
+              <ion-datetime (ionChange)="getDailyInventoryStatus(startDate, endDate)" displayFormat="DD-MMMM-YYYY" [(ngModel)]="startDate"></ion-datetime>
+            </ion-item>
+          </ion-col>
+          <ion-col col-lg-8 col-sm-2>
+            <ion-item>
+              <ion-label>Select End Date: </ion-label>
+              <ion-datetime (ionChange)="getDailyInventoryStatus(startDate, endDate)" displayFormat="DD-MMMM-YYYY" [(ngModel)]="endDate" [min]="startDate"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <br>
+        <ion-row style="font-size: medium">
+          Pallet Inventory Report - Advance Order Status <br>from {{startDate | date:"dd-MM-yyyy"}} to {{endDate | date:"dd-MM-yyyy"}}.
+        </ion-row>
+        <br>
+        <ion-row>
+          Showing first 100 rows:
+        </ion-row>
+      </div>
+
+      <table-row table-headers>
+        <ion-col col-1>S/N</ion-col>
+        <ion-col col-2>Delivery Date</ion-col>
+        <ion-col col-2>Qty</ion-col>
+        <ion-col col-4>Customer Name</ion-col>
+    </table-row>
+
+      <table-row table-data *ngFor="let ad of dailyInventoryStatusAdvanceOrderList, index as i">
+          <table-data col-1><span>{{i+1}}</span></table-data>
+          <table-data col-2><span>{{ad.Delivery_Date | date:"dd-MM-yyyy"}}</span></table-data>
+          <table-data col-2><span>{{ad.Qty}}</span></table-data>
+          <table-data col-4><span>{{ad.Customer_Name}}</span></table-data>
+      </table-row>
+        <table-row>
+          <table-data col-3>
+            <span>Total:</span>
+          </table-data>
+          <table-data col-2>
+            <span>{{totAdvOrdQty}}</span>
+          </table-data>
+        </table-row>
+
+      <div table-mobile>
+        <ion-list>
+          <ion-item *ngFor="let ad of dailyInventoryStatusAdvanceOrderList, index as i">
+            <ion-label>
+              <h3>{{ ad.Customer_Name}}</h3>
+              <p>{{ad.Qty}}</p>
+            </ion-label>
+            <ion-note item-right>
+              {{ad.Delivery_Date | date:"dd-MM-yyyy"}}
+            </ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Total: {{totAdvOrdQty}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </expandable-card> <!--Daily Inventory Status - Advance Order-->
+
+</ion-content>

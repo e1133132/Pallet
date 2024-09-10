@@ -1,0 +1,146 @@
+<!--
+  Generated template for the IssueNoteMgmtPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <ion-navbar color="primary">
+    <ion-title>Issue Notes Management</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <expandable-card [initialExpand]="true" [expandHeight]="3400">
+
+      <div card-title>
+        <ion-col col-1>
+          <ion-icon ios="ios-color-wand" md="md-color-wand"></ion-icon>
+        </ion-col>
+       Edit Issue Note
+      </div>
+
+      <div table-data>
+
+        <form [formGroup]="editIssueNoteForm" (ngSubmit) = "editIssueNote(editIssueNoteForm.value)">
+          <ion-input type="number" formControlName="Issue_Note_ID" hidden></ion-input>
+
+            <ion-item>
+              <ion-label stacked>Issue Note No</ion-label>
+              <ion-input type = "text" formControlName="Issue_Note_No" disabled></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Hire Order No</ion-label>
+              <ion-input #hireOrderNoInput type = "text" disabled></ion-input>
+            </ion-item>
+
+            <ion-input #hireOrderIDInput type = "text" formControlName="Hire_Order_ID" hidden></ion-input>
+
+            <ion-item>
+              <ion-label stacked>Qty Pending</ion-label>
+              <ion-input  #qtyPending type = "text" disabled></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Customer Name</ion-label>
+              <ion-input #customerName type = "text" disabled></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Pallet Type</ion-label>
+              <ion-input #palletType type = "text" disabled></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Issue Quantity</ion-label>
+              <ion-input type = "number" formControlName="Issue_Qty"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Issue Date</ion-label>
+              <ion-datetime displayFormat="DD-MMMM-YYYY" formControlName="Issue_Date" [min]="hireOrderDate"></ion-datetime>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Status</ion-label>
+              <ion-input formControlName="Status" disabled></ion-input>
+              <!--<ion-select formControlName="Status">-->
+                <!--<ion-option value="New">New</ion-option>-->
+                <!--<ion-option value="Obsolete">Obsolete</ion-option>-->
+                <!--<ion-option value="Issued">Issued</ion-option>-->
+                <!--<ion-option value="Completed">Completed</ion-option>-->
+              <!--</ion-select>-->
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Delivery Type</ion-label>
+              <ion-input #delivery_Type type = "text" disabled></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Vehicle No</ion-label>
+              <ion-input type = "text" formControlName="Vehicle_No"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Driver</ion-label>
+              <ion-input type = "text" formControlName="Driver"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Driver IC</ion-label>
+              <ion-input type = "text" formControlName="Driver_IC"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Transport Company</ion-label>
+              <ion-input type = "text" formControlName="Tpn_Company"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Transport Charge</ion-label>
+              <ion-input #tpnCharge type = "number" formControlName="Tpn_Charge"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Heat Treatment</ion-label>
+              <ion-select formControlName="Heat_treatment">
+                <ion-option value="No" selected="true">No</ion-option>
+                <ion-option value="Yes">Yes</ion-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Remarks</ion-label>
+              <ion-input type = "text" formControlName="Remarks"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Issue Type</ion-label>
+              <ion-input type = "text" formControlName="Issue_Type"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Qty Rejected</ion-label>
+              <ion-input type = "text" formControlName="Qty_Rejected"></ion-input>
+            </ion-item>
+
+          <ion-row text-center>
+            <ion-col align-items-end><button ion-button type="submit">Save Changes</button> <!--[disabled]="editIssueNoteForm.invalid"--> <!--TODO not working, old records do not meet requirements-->
+            </ion-col>
+            <ion-col align-items-start><button ion-button type="button" (click)="reloadForm()">Undo Changes</button></ion-col>
+          </ion-row>
+
+        </form>
+
+      </div>
+
+
+    </expandable-card>
+
+</ion-content>

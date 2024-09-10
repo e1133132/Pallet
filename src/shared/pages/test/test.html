@@ -1,0 +1,128 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Test Page</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-header (click)="onExpend()">
+      <ion-card-title>
+        Testing Expandable
+      </ion-card-title>
+    </ion-card-header>
+    <expandable [expanded]="expended" [expandHeight]="200">
+      <h1>Hello!</h1>
+      <h2>World!</h2>
+      <h3>Foo!</h3>
+      <h4>Bar!</h4>
+      <h1>Hello!</h1>
+      <h2>World!</h2>
+      <h3>Foo!</h3>
+      <h4>Bar!</h4>
+    </expandable>
+  </ion-card>
+
+  <expandable-card [initialExpand]="false" [expandHeight]="900">
+    <div card-title>Test Card</div>
+
+    <div primary-actions>
+      <button ion-button clear icon-only>
+        <ion-icon name="add"></ion-icon>
+      </button>
+      <button ion-button clear icon-only>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </div>
+
+    <div secondary-data>
+      <ion-item>
+        <ion-label>
+          Status:
+        </ion-label>
+        <ion-select interface="popover">
+          <ion-option selected>All</ion-option>
+          <ion-option>DO_Completed (56584)</ion-option>
+          <ion-option>JO_Completed (1707)</ion-option>
+          <ion-option>JO_Created (5216)</ion-option>
+          <ion-option>JO_Skipped (2885)</ion-option>
+          <ion-option>JO_Skipped_Partial (29)</ion-option>
+          <ion-option>New (2)</ion-option>
+          <ion-option>Obsolete (628)</ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div secondary-actions>
+      <button clear ion-button float-right>Action 2</button>
+      <button clear ion-button float-right>Action 1</button>
+    </div>
+
+    <div table-headers>
+      <ion-row>
+        <ion-col>
+
+        </ion-col>
+        <ion-col>
+          <span class="table-header">Ref No.</span>
+        </ion-col>
+        <ion-col col-4>
+          <span class="table-header">Customer Name</span>
+        </ion-col>
+        <ion-col>
+          <span class="table-header">Order Date</span>
+        </ion-col>
+        <ion-col>
+          <span class="table-header">Status</span>
+        </ion-col>
+        <ion-col *ngIf="platform.isLandscape()">
+          <span class="table-header">Sales Rep</span>
+        </ion-col>
+        <ion-col *ngIf="platform.isLandscape()">
+          <span class="table-header">Total Price</span>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div table-data>
+      <ion-row *ngFor="let so of salesOrderRepo.salesOrders">
+        <ion-col text-center>
+          <ion-checkbox></ion-checkbox>
+        </ion-col>
+        <ion-col>
+            <span class="table-data selectable-table-data" [ngClass]="{'selected-item': so.refNo == selectedSO?.refNo}"
+                  style="color: #9ccc64">{{ so.refNo }}</span>
+        </ion-col>
+        <ion-col col-4>
+          <span class="table-data">{{ so.customerName }}</span>
+        </ion-col>
+        <ion-col>
+          <span class="table-data">{{ so.orderDate }}</span>
+        </ion-col>
+        <ion-col>
+          <span class="table-data">{{ so.status }}</span>
+        </ion-col>
+        <ion-col *ngIf="platform.isLandscape()">
+          <span class="table-data">{{ so.salesRep }}</span>
+        </ion-col>
+        <ion-col *ngIf="platform.isLandscape()">
+          <span class="table-data">{{ so.totalPrice }}</span>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </expandable-card>
+
+  <ms-action-panel [expanded]="expended" [showMore]="true">
+    <p>Hello world! Foo and bar!</p>
+
+    <button more-action-button class="show-more-button" ion-button clear color="light" icon-only
+            (click)="onMoreActions($event)">
+      <ion-icon name="more"></ion-icon>
+    </button>
+  </ms-action-panel>
+
+</ion-content>

@@ -1,0 +1,44 @@
+<!-- Generated template for the CustomerContactsModalCreateComponent component -->
+<meta charset="utf-8">
+<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<form [formGroup]="createCustomerContactForm" (ngSubmit) = "createCustomerContact(createCustomerContactForm.value)">
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" stacked>Customer ID</ion-label>
+      <ion-input type="number" formControlName="Customer_ID" disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Contact Name</ion-label>
+      <ion-input type="text" formControlName="Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Designation</ion-label>
+      <ion-input type="text" formControlName="Designation"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Office No</ion-label>
+      <ion-input type="text" formControlName="Office_No"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Handphone No</ion-label>
+      <ion-input type="text" formControlName="Handphone_No"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Fax No</ion-label>
+      <ion-input type="text" formControlName="Fax_No"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Email</ion-label>
+      <ion-input type="email" formControlName="Email"></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <button ion-button type="submit" [disabled]="createCustomerContactForm.invalid">Confirm</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button type="button"  (click) = "close()">Cancel</button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</form>
+

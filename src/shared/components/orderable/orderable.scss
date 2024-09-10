@@ -1,0 +1,27 @@
+orderable {
+  ion-icon.order-icon {
+    color: rgba(0,0,0,0.87);
+
+    -webkit-transition: transform 0.375s;
+    -moz-transition: transform 0.375s;
+    -ms-transition: transform 0.375s;
+    -o-transition: transform 0.375s;
+    transition: transform 0.375s;
+  }
+  ion-icon.order-icon.ascending{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  span.ordered{
+    color: rgba(0,0,0,0.87);
+
+    -webkit-transition: color 0.375s;
+    -moz-transition: color 0.375s;
+    -ms-transition: color 0.375s;
+    -o-transition: color 0.375s;
+    transition: color 0.375s;
+  }
+}

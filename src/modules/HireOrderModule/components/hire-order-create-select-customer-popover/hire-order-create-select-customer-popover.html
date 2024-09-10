@@ -1,0 +1,9 @@
+<!-- Generated template for the HireOrderCreateSelectCustomerPopoverComponent component -->
+<ion-searchbar #hireOrderCustSearchBar (ionInput)="searchCustomerNames($event)" placeholder="Search Customer..."></ion-searchbar>
+<ion-list>
+  <ion-row *ngFor="let customer of allCustomers" (click) ="sendCustomerAndClose(customer)">
+    <ion-label style="border-bottom: 0.5px solid grey">
+    <span style="display: block; vertical-align: middle">{{customer.Customer_Name}}</span>
+  </ion-label>
+  </ion-row>
+</ion-list>

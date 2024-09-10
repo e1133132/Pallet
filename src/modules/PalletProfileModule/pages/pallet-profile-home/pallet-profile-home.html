@@ -1,0 +1,105 @@
+<!--
+  Generated template for the PalletProfileHomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pallet Profile Management</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-row align-items-center>
+      <ion-col col-lg-10 col-md-6 col-sm-4>
+        <ion-searchbar #palletProfileSearchBar (ionChange)="loadSearchOrderArrangeData($event)" placeholder="Search Pallet Profiles...">Search</ion-searchbar>
+      </ion-col>
+    </ion-row>
+
+    <expandable-card [initialExpand]="true" [expandHeight]="4500"
+                     [paginationData]="palletProfilePaginationData"
+                     (changePagination)="loadSearchOrderArrangeData($event)">
+
+    <div card-title>
+      <ion-row>
+        <ion-col col-sm-1 col-md-1 col-lg-1>
+          <img style="width:50px;" src="assets/imgs/pallet.png">
+        </ion-col>
+        <ion-col>
+          <span *ngIf="settings.getDeviceSize()=='lg' || settings.getDeviceSize()=='md'">Pallet Profile Management</span>
+          <span *ngIf="settings.getDeviceSize()=='sm' || settings.getDeviceSize()=='xs'">Pallet Mgmt</span>
+        </ion-col>
+      </ion-row>
+
+    </div>
+
+    <div primary-actions>
+      <button ion-button clear icon-only (click)="createPalletProfile()">
+        <ion-icon ios="ios-create" md="md-create"></ion-icon>
+      </button>
+    </div>
+
+    <table-row table-headers text-center>
+        <ion-col col-1></ion-col>
+        <table-header col-2 name="Pallet Type" id="Pallet_Type" [orderedColumn]="ppTableOrderedCol" (order)="loadSearchOrderArrangeData($event)"></table-header>
+        <table-header col-3 name="Size" id="Size" [orderedColumn]="ppTableOrderedCol" (order)="loadSearchOrderArrangeData($event)"></table-header>
+        <table-header col-1 name="Dynamic Load" id="Dynamic_Load" [orderedColumn]="ppTableOrderedCol" (order)="loadSearchOrderArrangeData($event)"></table-header>
+        <table-header col-1 name="Static Load" id="Static_Load" [orderedColumn]="ppTableOrderedCol" (order)="loadSearchOrderArrangeData($event)"></table-header>
+        <table-header col-1 name="Functions" id="Functions" [orderedColumn]="ppTableOrderedCol" (order)="loadSearchOrderArrangeData($event)"></table-header>
+        <table-header col-1 name="Qty" id="Qty" [orderedColumn]="ppTableOrderedCol" (order)="loadSearchOrderArrangeData($event)"></table-header>
+        <table-header col-1 name="Qty Loaned to LHP" id="Qty_Loaned_to_LHP" [orderedColumn]="ppTableOrderedCol" (order)="loadSearchOrderArrangeData($event)"></table-header>
+    </table-row>
+
+
+      <table-row table-data text-center *ngFor="let pp of allPalletProfiles, index as i" [class.selected]="isChecked(pp)"
+                 (click)="onPalletProfileClick(pp)">
+          <table-data col-1 text-center>
+            <ion-checkbox #palletProfileCheckBox [(disabled)]="!isPalletProfileNotChecked && !palletProfileCheckBox.checked"
+                          (ionChange)="openActionPanel(palletProfileCheckBox, pp)">
+            </ion-checkbox>
+          </table-data>
+          <table-data col-2><span class="table-data">{{pp.Pallet_Type}}</span></table-data>
+          <table-data col-3><span class="table-data">{{pp.Size}}</span></table-data>
+          <table-data col-1><span class="table-data">{{pp.Dynamic_Load}}</span></table-data>
+          <table-data col-1><span class="table-data">{{pp.Static_Load}}</span></table-data>
+          <table-data col-1><span class="table-data">{{pp.Functions}}</span></table-data>
+          <table-data col-1><span class="table-data">{{pp.Qty}}</span></table-data>
+          <table-data col-1><span class="table-data">{{pp.Qty_Loaned_to_LHP}}</span></table-data>
+      </table-row>
+
+      <div table-mobile>
+        <ion-list>
+          <ion-item *ngFor="let pp of allPalletProfiles, index as i" [class.selected]="isChecked(pp)">
+            <ion-checkbox #palletProfileCheckBox [(disabled)]="!isPalletProfileNotChecked && !palletProfileCheckBox.checked"
+                          (ionChange)="openActionPanel(palletProfileCheckBox, pp)">
+            </ion-checkbox>
+            <ion-label tappable (click)="onPalletProfileClick(pp)">
+              <h2>{{ pp.Pallet_Type }}</h2>
+              <h3>{{ pp.Qty}}</h3>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </expandable-card>
+
+    <div id="bottom-bulk-action-panel" [ngClass]="{'hide-panel' : isPalletProfileNotChecked }">
+      <ion-row>
+        <ion-col col-8><p>Pallet Profile <u>{{checkedPalletProfilePalletType}}</u> is currently selected</p></ion-col>
+        <ion-col padding-right>
+          <button ion-button clear icon-only float-right color="light" (click)="openPalletProfileContextMenu($event)">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+</ion-content>

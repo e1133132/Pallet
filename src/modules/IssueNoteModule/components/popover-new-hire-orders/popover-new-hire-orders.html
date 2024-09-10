@@ -1,0 +1,11 @@
+<!-- Generated template for the PopoverNewHireOrdersComponent component -->
+<div>
+<ion-list>
+  <ion-title>Select Hire Order</ion-title>
+  <ion-row *ngFor="let ho of newHireOrders" (click) ="sendHireOrderAndClose(ho)">
+    <ion-label style="border-bottom: 0.5px solid grey">
+      <span style="display: block; vertical-align: middle">{{ho.Hire_Order_No}}</span><span item-right>{{ho.Status}}</span>
+    </ion-label>
+  </ion-row>
+</ion-list>
+</div>

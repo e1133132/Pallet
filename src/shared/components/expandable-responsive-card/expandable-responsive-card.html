@@ -1,0 +1,69 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      <ion-row align-items-center>
+        <ion-col>
+          <span class="card-title"><ng-content select="[card-title]"></ng-content></span>
+        </ion-col>
+        <ion-col class="primary-actions" text-right>
+          <ng-content select="[primary-actions]"></ng-content>
+
+          <button *ngIf="filterData" ion-button clear icon-only (click)="onViewFilters($event)">
+            <ion-icon name="funnel"></ion-icon>
+          </button>
+
+          <button ion-button clear icon-only (click)="onExpand()">
+            <ion-icon class="expand-icon" [class.expanded]="expanded" name="arrow-dropdown"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-title>
+  </ion-card-header>
+
+  <expandable [expanded]="expanded" [expandHeight]="expandHeight" [expandTime]="expandTime">
+    <ion-card-content *ngIf="showSecondaries" class="secondaries">
+      <ion-row>
+        <ion-col #secondaryData>
+          <ng-content select="[secondary-data]"></ng-content>
+        </ion-col>
+        <ion-col #secondaryActions text-right>
+          <ng-content select="[secondary-actions]"></ng-content>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+
+    <div class="details">
+      <ng-content select="[details]"></ng-content>
+    </div>
+
+    <ng-content *ngIf="platform.is('table') || platform.is('core')" select="table-row[table-headers]"></ng-content>
+
+    <ng-container *ngIf="showTableHeadersContent">
+      <div #tableHeaders class="table-header">
+        <ng-content select="[table-headers]"></ng-content>
+      </div>
+    </ng-container>
+
+    <ng-content *ngIf="platform.is('table') || platform.is('core')" select="table-row[table-data]"></ng-content>
+
+    <div #tableData class="table-data" *ngIf="showTableDataContent">
+      <ng-content select="[table-data]"></ng-content>
+    </div>
+
+    <ng-container *ngIf="platform.is('mobile')">
+      <ng-content select="[table-mobile]"></ng-content>
+    </ng-container>
+
+    <div #totals>
+      <ng-content select="[totals]"></ng-content>
+    </div>
+    <hr *ngIf="totals.children.length > 0"/>
+
+    <div class="pagination">
+      <table-pagination *ngIf="paginationData" [paginationData]="paginationData"
+                        (changePagination)="onChangePagination($event)"></table-pagination>
+    </div>
+
+  </expandable>
+</ion-card>

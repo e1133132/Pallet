@@ -1,0 +1,9 @@
+<!-- Generated template for the IssueNoteContextMenuHomeComponent component -->
+<ion-list>
+  <ion-row>
+    <button ion-item (click)="generatePDFOfIssueNote()">Generate Issue Note For Print</button>
+    <button ion-item *ngIf="issueNote.Status=='New'" (click)="setIssueNoteToIssued()">Warehouse Issue</button>
+    <button ion-item *ngIf="issueNote.Status=='Issued'" (click)="setIssueNoteToCompleted()">Acknowledge Issue Note</button>
+    <button ion-item *ngIf="issueNote.Status=='New'" (click)="deleteIssueNote()">Remove Issue Note</button>
+  </ion-row>
+</ion-list>

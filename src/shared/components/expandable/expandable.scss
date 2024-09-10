@@ -1,0 +1,12 @@
+expandable {
+
+  .expand-wrapper {
+    max-height: 0;
+    transition: max-height .3s;
+  }
+
+  .collapsed {
+    max-height: 0 !important;
+  }
+
+}

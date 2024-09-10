@@ -1,0 +1,126 @@
+<!--
+  Generated template for the RetrieveNoteHomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Retrieve Notes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-row align-items-center>
+      <ion-col col-lg-10 col-md-6 col-sm-4>
+        <ion-searchbar #retrieveNoteSearchBar (ionInput)="searchRetrieveNotes($event)" placeholder="Search Retrieve Notes...">Search</ion-searchbar>
+      </ion-col>
+    </ion-row>
+
+    <expandable-card [initialExpand]="true" [expandHeight]="4500"
+                     [paginationData]="paginationDataRN"
+                     (changePagination)="onChangePaginationOrColumnRN($event)">
+
+      <div card-title>
+        <ion-row>
+          <ion-col col-sm-1 col-md-1 col-lg-1>
+            <img style="width: 40px" src="assets/imgs/retrieveBox.png">
+          </ion-col>
+          <ion-col>
+            Retrieve Notes
+          </ion-col>
+      </ion-row>
+
+      </div>
+
+      <div primary-actions>
+        <button ion-button clear (click)="goToRetrieveNoteSummaryReportModal()">Summary Report</button>
+        <button ion-button clear icon-only (click)="goToCreateRetrieveNote()">
+          <ion-icon ios="ios-create" md="md-create"></ion-icon>
+        </button>
+      </div>
+
+      <table-row table-headers>
+          <ion-col col-1></ion-col> <!--Checkbox Column-->
+          <table-header col-2 name="Retrieve Note No" id="Retrieve_Note_No" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>
+          <table-header col-2 name="Customer" id="Customer_Name" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>
+          <table-header col-2 name="Pallet Type" id="Pallet_Type" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>
+          <table-header col-1 name="Qty" id="Qty" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>
+          <table-header col-1 name="Retrieve Date" id="Retrieve_Date" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>
+          <table-header col-1 name="Status" id="Status" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>
+          <!--<table-header col-1 name="Retrieve Type" id="Retrieve_Type" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>-->
+          <!--<table-header col-2 name="Retrieve Address" id="Address" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>-->
+          <!--<table-header col-1 name="Vehicle No" id="Vehicle_No" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>-->
+          <!--<table-header col-1 name="Driver" id="Driver" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>-->
+          <!--<table-header col-1 name="Driver IC" id="Driver_IC" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>-->
+          <!--<table-header col-1 name="Tpn Company" id="Tpn_Company" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>-->
+          <!--<table-header col-1 name="Dehire Charge" id="Dehire_Charge" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>-->
+          <!--<table-header col-1 name="Tpn Charge" id="Tpn_Charge" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>-->
+          <table-header col-2 name="Remarks" id="Remarks" [orderedColumn]="rNTableOrderedCol" (order)="onChangePaginationOrColumnRN($event)"></table-header>
+      </table-row>
+
+      <table-row table-data *ngFor="let rn of allRetrieveNotesDTO, index as i" [class.selected]="isChecked(rn)"
+                 (click)="onRetrieveNoteClick(rn)">
+        <table-data>
+          <ion-checkbox #retrieveNoteCheckBox [(disabled)]="!isRetrieveNoteNotChecked && !retrieveNoteCheckBox.checked"
+                        (ionChange)="openActionPanel(retrieveNoteCheckBox, rn)">
+          </ion-checkbox>
+        </table-data>
+        <table-data col-2><span>{{rn.Retrieve_Note_No}}</span></table-data>
+        <table-data col-2><span>{{rn.Customer_Name}}</span></table-data>
+        <table-data col-2><span>{{rn.Pallet_Type}}</span></table-data>
+        <table-data col-1><span>{{rn.Qty}}</span></table-data>
+        <table-data col-1><span>{{rn.Retrieve_Date | date: "dd-MM-yyyy"}}</span></table-data>
+        <table-data col-1><span>{{rn.Status}}</span></table-data>
+        <!--<table-data col-1><span>{{rn.Retrieve_Type}}</span></table-data>--> <!--If needed, can be uncommented, but the table is too cluttered-->
+        <!--<table-data col-2><span>{{rn.Address}}</span></table-data>-->
+        <!--<table-data col-1><span>{{rn.Vehicle_No}}</span></table-data>-->
+        <!--<table-data col-1><span>{{rn.Driver}}</span></table-data>-->
+        <!--<table-data col-1><span>{{rn.Driver_IC}}</span></table-data>-->
+        <!--<table-data col-1><span>{{rn.Tpn_Company}}</span></table-data>-->
+        <!--<table-data col-1><span>{{rn.Dehire_Charge}}</span></table-data>-->
+        <!--<table-data col-1><span>{{rn.Tpn_Charge}}</span></table-data>-->
+        <table-data col-2><span>{{rn.Remarks}}</span></table-data>
+      </table-row>
+
+      <div table-mobile>
+        <ion-list>
+          <ion-item *ngFor="let rn of allRetrieveNotesDTO, index as i" [class.selected]="isChecked(rn)">
+            <ion-checkbox #retrieveNoteCheckBox [(disabled)]="!isRetrieveNoteNotChecked && !retrieveNoteCheckBox.checked"
+                          (ionChange)="openActionPanel(retrieveNoteCheckBox, rn)">
+            </ion-checkbox>
+            <ion-label tappable (click)="onRetrieveNoteClick(rn)">
+              <h2>{{ rn.Retrieve_Note_No }}</h2>
+              <p style="text-after-overflow: ellipsis">{{ rn.Customer_Name}}</p>
+              <p>{{rn.Status}}</p>
+            </ion-label>
+            <ion-note item-right>
+              {{rn.Retrieve_Date | date:"dd-MM-yyyy"}}
+            </ion-note>
+          </ion-item>
+
+        </ion-list>
+      </div>
+
+    </expandable-card>
+
+
+  <div id="bottom-bulk-action-panel" [ngClass]="{'hide-panel' : isRetrieveNoteNotChecked }">
+    <ion-row>
+      <ion-col col-8><p>Retrieve Note: <u>{{stringSelectedRetrieveNoteNo}}</u> is currently selected</p></ion-col>
+      <ion-col padding-right>
+        <button ion-button clear icon-only float-right color="light" (click)="openRetrieveNoteContextMenu($event)">
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

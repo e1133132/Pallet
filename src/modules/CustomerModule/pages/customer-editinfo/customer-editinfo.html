@@ -1,0 +1,82 @@
+<!--
+  Generated template for the CustomerEditinfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <ion-navbar>
+    <ion-title>Manage Information of {{customer.Customer_Name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <button ion-button type="button" (click)="goToCustomerContact()">Manage Customer Contact</button>
+
+  <form padding-top [formGroup]="editCustomerForm" (ngSubmit) = "EditCustomer(editCustomerForm.value)">
+    <ion-list>
+        <ion-item>
+          <ion-label stacked>Customer ID: </ion-label>
+          <ion-input type = "number" formControlName="customer_ID" disabled></ion-input> <!--value="{{customer.customerID}}"-->
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Customer Name: </ion-label>
+          <ion-input type = "text" formControlName="Customer_Name" [(ngModel)]="customer.Customer_Name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Business Type: </ion-label>
+          <ion-input type = "text" formControlName="Business_Type" value="{{customer.Business_Type}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Credit Terms: </ion-label>
+          <ion-input type = "text" formControlName="Credit_Terms" value="{{customer.Credit_Terms}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Address: </ion-label>
+          <ion-input type = "text" formControlName="Address" value="{{customer.Address}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>GST Code: </ion-label>
+          <ion-input type = "number" formControlName="GLN_Code" value="{{customer.GLN_Code}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Currency: </ion-label>
+          <ion-input type = "text" formControlName="Currency" value="{{customer.Currency}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>GST: </ion-label>
+          <ion-input type = "number" formControlName="GST" value="{{customer.GST}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Customer Status: </ion-label>
+          <ion-select placeholder="Choose Your Status Here" formControlName="status">
+            <ion-option value="Active">Active</ion-option>
+            <ion-option value="Idle">Idle</ion-option>
+          </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-row>
+      <ion-col col-2>
+        <button ion-button type="submit">Save Changes</button> <!--TODO: [disabled]="!editCustomerForm.valid" <--fix this-->
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button type="button" (click)="close()">Cancel</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>

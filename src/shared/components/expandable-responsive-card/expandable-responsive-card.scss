@@ -1,0 +1,114 @@
+expandable-responsive-card {
+
+  ion-card{
+    ion-icon.expand-icon {
+      -webkit-transition: transform 0.375s;
+      -moz-transition: transform 0.375s;
+      -ms-transition: transform 0.375s;
+      -o-transition: transform 0.375s;
+      transition: transform 0.375s;
+    }
+    ion-icon.expand-icon.expanded {
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+
+    .primary-actions div {
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+    }
+
+    .details{
+      ion-list ion-row ion-col{
+        padding: 10px 20px;
+      }
+    }
+
+    hr {
+      margin: 0;
+    }
+
+    .table-header {
+    }
+    .table-data {
+
+      overflow: hidden;
+      width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: block;
+
+      div ion-row {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding-top: 16px;
+        padding-bottom: 16px;
+      }
+      .row:hover{
+        //background-color: #eee;
+      }
+      .row.selected{
+      }
+    }
+    table-row{
+      //padding: 16px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+      table-header, .col{
+        padding-top: 16px !important;
+        padding-bottom: 16px !important;
+      }
+
+      table-data{
+        padding-top: 16px !important;
+        padding-bottom: 16px !important;
+
+        overflow: hidden;
+        width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+      }
+      table-data.first-col{
+      }
+    }
+    table-row[table-data]:hover{
+      //background-color: #eee;
+    }
+    table-row.selected{
+    }
+    .table-header{
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    [table-mobile] .list .item{
+      .item-cover{
+        width: 20%;
+      }
+    }
+  }
+
+
+  /* Small devices (portrait tablets and large phones, 768px and down) */
+  @media only screen and (max-width: 768px) {
+
+  }
+
+  /* Small devices (portrait tablets and large phones, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    ion-card {
+
+      //box-shadow: none !important;
+
+
+
+
+
+    }
+  }
+
+}

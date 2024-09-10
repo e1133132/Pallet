@@ -1,0 +1,148 @@
+<!--
+  Generated template for the IssueNoteHomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Issue Notes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-row align-items-center>
+      <ion-col col-lg-10 col-md-6 col-sm-4>
+        <ion-searchbar #issueNoteSearchBar (ionInput)="searchIssueNotes($event)" placeholder="Search Issue Notes...">Search</ion-searchbar>
+      </ion-col>
+    </ion-row>
+
+    <expandable-card [initialExpand]="true" [expandHeight]="3400"
+                     [paginationData]="paginationDataIssN"
+                     (changePagination)="onChangePaginationOrColumnIssN($event)">
+
+      <div card-title>
+        <ion-col col-1>
+          <ion-icon ios="ios-paper" md="md-paper"></ion-icon>
+        </ion-col>
+        Issue Notes
+      </div>
+
+      <div primary-actions>
+        <button ion-button clear icon-only (click)="goToCreateIssueNote()">
+          <ion-icon ios="ios-create" md="md-create"></ion-icon>
+        </button>
+      </div>
+
+      <table-row table-headers>
+          <ion-col col-1></ion-col>
+          <table-header col-1 name="Issue Note No" id="Issue_Note_No" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+          <table-header col-1 name="Hire Order No" id="Hire_Order_No" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+          <table-header col-1 name="Pending Qty" id="Qty_Pending" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+          <table-header col-1 name="Name" id="Customer_Name" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+          <table-header col-1 name="Pallet Type" id="Pallet_Type" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+          <table-header col-1 name="Issue Qty" id="Issue_Qty" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+          <table-header col-1 name="Date Issued" id="Issue_Date" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+          <table-header col-1 name="Status" id="Status" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+          <!--<table-header col-1 name="Delivery Type" id="Delivery_Type" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>-->
+          <!--<table-header col-1 name="Vehicle No" id="Vehicle_No" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>-->
+          <!--<table-header col-1 name="Driver" id="Driver" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>-->
+          <!--<table-header col-1 name="Driver IC" id="Driver_IC" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>-->
+          <table-header col-1 name="Tpn Company" id="Tpn_Company" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+          <table-header col-1 name="Tpn Charge" id="Tpn_Charge" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+          <!--<table-header col-1 name="Heat Treated" id="Heat_treatment" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>-->
+          <table-header col-1 name="Remarks" id="Remarks" [orderedColumn]="issNTableOrderedCol" (order)="onChangePaginationOrColumnIssN($event)"></table-header>
+      </table-row>
+
+      <!--<div table-data *ngFor="let iss of allIssueNotesDTO, index as i" [class.selected]="isChecked(iss)">-->
+        <!--<ion-row (click)="onIssueNoteClick(iss)">-->
+          <!--<ion-col col-1 text-center>-->
+            <!--<ion-checkbox #issueNoteCheckBox [(disabled)]="!isIssueNoteNotChecked && !issueNoteCheckBox.checked"-->
+                          <!--(ionChange)="openActionPanel(issueNoteCheckBox, iss)">-->
+            <!--</ion-checkbox>-->
+          <!--</ion-col>-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Issue_Note_No}}</span></ion-col>-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Hire_Order_No}}</span></ion-col>-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Qty_Pending}}</span></ion-col>-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Customer_Name}}</span></ion-col>-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Pallet_Type}}</span></ion-col>-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Issue_Qty}}</span></ion-col>-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Issue_Date | date:"dd-MM-yyyy"}}</span></ion-col>-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Status}}</span></ion-col>-->
+          <!--&lt;!&ndash;<ion-col col-1><span class="table-data">{{iss.Delivery_Type}}</span></ion-col>&ndash;&gt;-->
+          <!--&lt;!&ndash;<ion-col col-1><span class="table-data">{{iss.Vehicle_No}}</span></ion-col>&ndash;&gt;-->
+          <!--&lt;!&ndash;<ion-col col-1><span class="table-data">{{iss.Driver}}</span></ion-col>&ndash;&gt;-->
+          <!--&lt;!&ndash;<ion-col col-1><span class="table-data">{{iss.Driver_IC}}</span></ion-col>&ndash;&gt;-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Tpn_Company}}</span></ion-col>-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Tpn_Charge}}</span></ion-col>-->
+          <!--&lt;!&ndash;<ion-col col-1><span class="table-data">{{iss.Heat_treatment}}</span></ion-col>&ndash;&gt;-->
+          <!--<ion-col col-1><span class="table-data">{{iss.Remarks}}</span></ion-col>-->
+        <!--</ion-row>-->
+
+      <!--</div>-->
+
+      <table-row table-data *ngFor="let iss of allIssueNotesDTO, index as i" [class.selected]="isChecked(iss)"
+                 (click)="onIssueNoteClick(iss)">
+        <table-data col-1 text-center>
+          <ion-checkbox #issueNoteCheckBox [(disabled)]="!isIssueNoteNotChecked && !issueNoteCheckBox.checked"
+                        (ionChange)="openActionPanel(issueNoteCheckBox, iss)">
+          </ion-checkbox>
+        </table-data>
+        <table-data col-1><span>{{iss.Issue_Note_No}}</span></table-data>
+        <table-data col-1><span>{{iss.Hire_Order_No}}</span></table-data>
+        <table-data col-1><span>{{iss.Qty_Pending}}</span></table-data>
+        <table-data col-1><span>{{iss.Customer_Name}}</span></table-data>
+        <table-data col-1><span>{{iss.Pallet_Type}}</span></table-data>
+        <table-data col-1><span>{{iss.Issue_Qty}}</span></table-data>
+        <table-data col-1><span>{{iss.Issue_Date | date:"dd-MM-yyyy"}}</span></table-data>
+        <table-data col-1><span>{{iss.Status}}</span></table-data>
+        <!--<table-data col-1><span>{{iss.Delivery_Type}}</span></table-data>-->
+        <!--<table-data col-1><span>{{iss.Vehicle_No}}</span></table-data>-->
+        <!--<table-data col-1><span>{{iss.Driver}}</span></table-data>-->
+        <!--<table-data col-1><span>{{iss.Driver_IC}}</span></table-data>-->
+        <table-data col-1><span>{{iss.Tpn_Company}}</span></table-data>
+        <table-data col-1><span>{{iss.Tpn_Charge}}</span></table-data>
+        <!--<table-data col-1><span>{{iss.Heat_treatment}}</span></table-data>-->
+        <table-data col-1><span>{{iss.Remarks}}</span></table-data>
+      </table-row>
+
+      <div table-mobile>
+        <ion-list>
+          <ion-item *ngFor="let iss of allIssueNotesDTO, index as i" [class.selected]="isChecked(iss)">
+            <ion-checkbox #issueNoteCheckBox [(disabled)]="!isIssueNoteNotChecked && !issueNoteCheckBox.checked"
+                          (ionChange)="openActionPanel(issueNoteCheckBox, iss)">
+            </ion-checkbox>
+            <ion-label tappable (click)="onIssueNoteClick(iss)">
+              <h2>{{ iss.Issue_Note_No }}</h2>
+              <h3>{{ iss.Customer_Name}}</h3>
+              <p>{{iss.Status}}</p>
+            </ion-label>
+            <ion-note item-right>
+              {{iss.Issue_Date | date:"dd-MM-yyyy"}}
+            </ion-note>
+          </ion-item>
+
+        </ion-list>
+      </div>
+
+    </expandable-card>
+
+    <div id="bottom-bulk-action-panel" [ngClass]="{'hide-panel' : isIssueNoteNotChecked }">
+      <ion-row>
+        <ion-col col-8><p>Issue Note <u>{{idIssueNote}}</u> is currently selected</p></ion-col>
+        <ion-col padding-right>
+          <button ion-button clear icon-only float-right color="light" (click)="openIssueNoteContextMenu($event)">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+</ion-content>

@@ -1,0 +1,73 @@
+<!--
+  Generated template for the CustomerRateChargePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Rate Charges for {{customer.Customer_Name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <button ion-button (click)="goToCreateRateCharge()">Create New Rate Charge</button>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Options
+      </ion-col>
+      <ion-col>
+        Pallet Type
+      </ion-col>
+      <ion-col>
+        Rental Rate
+      </ion-col>
+      <ion-col>
+        Dehire Charge
+      </ion-col>
+      <ion-col>
+        Tpn Charge
+      </ion-col>
+      <ion-col>
+        Admin Charge
+      </ion-col>
+      <ion-col>
+        Effective Date
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor = "let crc of customerRateCharges ; index as i">
+      <ion-col>
+        <button ion-button (click)="presentContextMenu($event, i)" style="color: black;background: aliceblue; border: solid; border-color: black">
+          <ion-icon name= "more"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        {{getPalletType(crc.Pallet_Profile_ID)}}
+      </ion-col>
+      <ion-col>
+        {{crc.Rental_Rate}}
+      </ion-col>
+      <ion-col>
+        {{crc.Dehire_Charge}}
+      </ion-col>
+      <ion-col>
+        {{crc.Tpn_Charge}}
+      </ion-col>
+      <ion-col>
+        {{crc.Admin_Charge}}
+      </ion-col>
+      <ion-col>
+        {{crc.Effective_Date}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

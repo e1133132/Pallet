@@ -1,0 +1,5 @@
+<span padding-right [class.ordered]="isOrdered">
+  <b *ngIf="isOrdered">{{ name }}</b>
+  {{ !isOrdered? name: ''}}
+</span>
+<ion-icon *ngIf="isOrdered" class="order-icon" [class.ascending]="!isDescending" name="arrow-dropdown"></ion-icon>

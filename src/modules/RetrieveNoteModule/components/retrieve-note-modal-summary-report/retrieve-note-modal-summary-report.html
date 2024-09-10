@@ -1,0 +1,38 @@
+<!-- Generated template for the RetrieveNoteModalSummaryReportComponent component -->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <ion-label style="font-size: x-large" text-center>
+    Generate Summary Report
+  </ion-label>
+</ion-header>
+
+<ion-content color = "secondary" padding>
+  <ion-row>
+  <ion-col>
+    <ion-label style="font-size: medium" text-left>Please select report <b><u>start</u></b> date: </ion-label>
+  </ion-col>
+  <ion-col>
+    <ion-datetime style="font-size: medium" displayFormat="DD-MMMM-YYYY" [(ngModel)]="startDate"></ion-datetime>
+  </ion-col>
+</ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-label style="font-size: medium" text-left>Please select report <b><u>end</u></b> date: </ion-label>
+    </ion-col>
+    <ion-col>
+      <ion-datetime style="font-size: medium" displayFormat="DD-MMMM-YYYY" [(ngModel)]="endDate" [min]="startDate"></ion-datetime>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col text-center>
+      <button item-right ion-button (click)="generateXLTotalQtySummaryReport(startDate, endDate)">Generate Excel File</button>
+    </ion-col>
+    <ion-col text-center>
+      <button ion-button item-left (click)="close()">Cancel</button>
+    </ion-col>
+  </ion-row>
+
+
+</ion-content>

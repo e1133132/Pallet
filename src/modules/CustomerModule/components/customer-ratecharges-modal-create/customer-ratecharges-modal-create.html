@@ -1,0 +1,47 @@
+<!-- Generated template for the CustomerRatechargesModalCreateComponent component -->
+<meta charset="utf-8">
+<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<ion-label>Create New Charge Rate</ion-label>
+<form [formGroup]="createCustomerRateChargeForm" (ngSubmit) = "createCustomerRateCharge(createCustomerRateChargeForm.value)">
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" stacked>Customer ID</ion-label>
+      <ion-input type="number" formControlName="Customer_ID" disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Pallet Type</ion-label>
+      <ion-select formControlName="Pallet_Profile_ID">
+        <ion-option *ngFor = "let pt of palletTypes" [value]="pt.Pallet_Profile_ID">{{pt.Pallet_Type}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Rental Rate</ion-label>
+      <ion-input type="float" formControlName="Rental_Rate"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Dehire Charge</ion-label>
+      <ion-input type="float" formControlName="Dehire_Charge"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Admin Charge</ion-label>
+      <ion-input type="float" formControlName="Admin_Charge"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Tpn Charge</ion-label>
+      <ion-input type="float" formControlName="Tpn_Charge"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Effective Date</ion-label>
+      <ion-datetime formControlName="Effective_Date"></ion-datetime>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <button ion-button type="submit" [disabled]="!createCustomerRateChargeForm.valid">Confirm</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button type="button" (click) = "close()">Cancel</button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+</form>

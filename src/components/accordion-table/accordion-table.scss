@@ -1,0 +1,9 @@
+accordion-table {
+    .expand-wrapper {
+      transition: 0.2s linear;    //transition for smoothness
+    }
+
+    .collapsed {
+      height: 0 !important;   //to disappear
+    }
+}

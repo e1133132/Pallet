@@ -1,0 +1,140 @@
+<!--
+  Generated template for the CustomerMonthlySummaryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Monthly Summary for {{customer.Customer_Name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-grid>
+<ion-row>
+  <!--<ion-col col-9 >-->
+  <!--<ion-item>-->
+    <!--<ion-label stacked>Select Month and Year Here...</ion-label>-->
+    <!--<ion-datetime displayFormat="YYYY-MMM" [(ngModel)]="selectedDate"></ion-datetime>-->
+  <!--</ion-item>-->
+  <!--</ion-col>-->
+  <!--<ion-col col-3>-->
+  <!--<button ion-button (click)="generateMthSummary()">Generate</button>-->
+  <!--</ion-col>-->
+
+  <ion-col>
+    <ion-item>
+      <ion-label>Year: </ion-label>
+    </ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item>
+      <ion-select [(ngModel)]="selectYear">
+        <ion-option *ngFor="let year of years" [value]="year">{{year}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-col>
+  <ion-col col-2>
+    <ion-item>
+      <ion-label>Month: </ion-label>
+    </ion-item>
+  </ion-col>
+  <ion-col col-4>
+    <ion-item>
+      <ion-select [(ngModel)]="selectMonth">
+        <ion-option *ngFor="let month of months" [value]="month">{{month}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-col>
+  <ion-col col-2>
+    <button ion-button (click)="generateMthSummary()">Generate</button>
+  </ion-col>
+</ion-row>
+  <ion-row>
+    <ion-col col-2>
+      No.
+    </ion-col>
+    <ion-col col-2>
+      Date
+    </ion-col>
+    <ion-col col-2>
+      Ref No.
+    </ion-col>
+    <ion-col col-2>
+      Issue Qty
+    </ion-col>
+    <ion-col col-2>
+      Dehire Qty
+    </ion-col>
+    <ion-col col-2>
+      Bal. Hired Qty
+    </ion-col>
+
+  </ion-row>
+  <div *ngIf="isYearandMthEntered">
+  <!--Special Row for Balance brought over last month -->
+  <ion-row>
+    <ion-col col-10>
+      Balance From Last Month
+    </ion-col>
+    <ion-col col-2>
+      {{balanceFromLastMonth}}
+    </ion-col>
+  </ion-row>
+  <!--Data for Issue Note -->
+  <ion-row *ngFor="let is of allCustNotes, index as i">
+    <ion-col col-2>
+      {{i+1}}
+    </ion-col>
+    <ion-col col-2>
+      {{is.Date}}
+    </ion-col>
+    <ion-col col-2>
+      {{is.Ref_No}}
+    </ion-col>
+    <ion-col col-2>
+      {{is.Issue_Qty}}
+    </ion-col>
+    <ion-col col-2>
+      {{is.Retrieve_Qty}}
+    </ion-col>
+    <ion-col col-2>
+      {{custBalanceQtys[i]}}
+    </ion-col>
+  </ion-row>
+    <ion-row>
+      <ion-col col-2>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+      <ion-col col-2>
+        Sub-Total:
+      </ion-col>
+      <ion-col col-2>
+        {{totalIssueQty}}
+      </ion-col>
+      <ion-col col-2>
+        {{totalRetrieveQty}}
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        Closing Balance Quantity As At End {{selectMonth}}-{{selectYear}}:
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+      <ion-col col-2>
+        {{balanceThisMonth}}
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-grid>
+</ion-content>

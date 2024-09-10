@@ -1,0 +1,9 @@
+<!-- Generated template for the RetrieveNoteContextMenuHomeComponent component -->
+<ion-list>
+  <ion-row>
+    <button ion-item (click)="generateXLOfRetrieveNote()">Print Retrieve Note</button>
+    <button ion-item *ngIf="retrieveNote.Status=='New'" (click)="acknowledgeRN()">Acknowledge Retrieve Note</button>
+    <button ion-item *ngIf="retrieveNote.Status=='Completed'" (click)="undoAcknowledgeRN()">Undo Acknowledgement</button>
+    <button ion-item (click)="deleteRetrieveNote()">Remove Retrieve Note</button>
+  </ion-row>
+</ion-list>

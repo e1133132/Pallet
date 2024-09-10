@@ -1,0 +1,9 @@
+page-test {
+  ion-content {
+    background-color: map_get($colors, primary-light) !important;
+  }
+
+  ion-card{
+    box-shadow: none !important;
+  }
+}

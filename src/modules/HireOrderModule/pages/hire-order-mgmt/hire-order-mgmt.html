@@ -1,0 +1,177 @@
+<!--
+  Generated template for the HireOrderMgmtPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <ion-navbar color="primary">
+    <ion-title>Hire Order Management</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <expandable-card [initialExpand]="false" [expandHeight]="3400">
+
+      <div card-title>
+        <ion-col col-1>
+          <ion-icon ios="ios-color-wand" md="md-color-wand"></ion-icon>
+        </ion-col>
+        Edit Hire Order
+      </div>
+
+      <div table-data>
+        <form padding-top [formGroup]="editHireOrderForm" (ngSubmit) = "editHireOrder(editHireOrderForm.value)">
+          <ion-item hidden>
+            <ion-input type="text" formControlName="Hire_Order_ID" hidden></ion-input>
+          </ion-item>
+            <ion-item>
+              <ion-label stacked>Hire Order No</ion-label>
+              <ion-input type = "text" disabled formControlName="Hire_Order_No" ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Choose Customer</ion-label>
+              <ion-input type = "text" formControlName="Customer_ID" (ionFocus)="openHireOrderSelectCustomerPopOver($event)"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Customer Name</ion-label>
+              <ion-input #customerName type = "text" disabled placeholder="Choose Customer First"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Quantity</ion-label>
+              <ion-input type = "number" formControlName="Qty" ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Pallet Type</ion-label>
+              <ion-select type = "text" formControlName="Pallet_Profile_ID">
+                <ion-option *ngFor="let pallet of allPallets" [value]="pallet.Pallet_Profile_ID">{{pallet.Pallet_Type}}</ion-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Date of Hire</ion-label>
+              <ion-datetime displayFormat="DD-MMMM-YYYY" formControlName="Hire_Date" [min]="currentDate"></ion-datetime>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Expected Issue Date</ion-label>
+              <ion-datetime displayFormat="DD-MMMM-YYYY" formControlName="Expected_Issue_Date" [min]="currentDate" [max]="maxDate"></ion-datetime>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Delivery Type</ion-label>
+              <ion-select formControlName="Delivery_Type">
+                <ion-option value= "Self Collection">Self Collection</ion-option>
+                <ion-option value="Delivery">Delivery</ion-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Delivery Address</ion-label>
+              <ion-input #custDeliveryAdd type ="text" formControlName="Delivery_Address" disabled></ion-input>     <!-- this is assuming that Customer Shipping Address and Billing Address are the same-->
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Status</ion-label>
+              <ion-select formControlName="Status">
+                <ion-option value= "New">New</ion-option>
+                <ion-option value= "Hold">Hold</ion-option>
+                <ion-option value= "Released">Released</ion-option>
+                <ion-option value= "Partially Complete">Partially Complete</ion-option>
+                <ion-option value= "Completed">Completed</ion-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Advance Order</ion-label>
+              <ion-select formControlName="Advance_Order">
+                <ion-option *ngFor="let order of advanceOrders" [value]="order">{{order}}</ion-option>
+              </ion-select>
+            </ion-item>
+
+          <ion-row text-center>
+            <ion-col align-items-end><button ion-button type="submit">Save Hire Order</button>
+            </ion-col>
+            <ion-col align-items-start><button ion-button type="button" (click)="revertEditInfoChanges()">Undo Changes</button></ion-col>
+          </ion-row>
+
+        </form>
+      </div>
+
+    </expandable-card>  <!--Edit Hire Order-->
+
+    <expandable-card [initialExpand]="false" [expandHeight]="4500"
+                     [paginationData]="paginationDataLinkedIOHO"
+                     (changePagination)="onChangePaginationLinkedIOHO($event)"> <!--Pagination wont be shown-->
+
+      <div card-title>
+        <ion-col col-1>
+          <ion-icon ios="ios-link" md="md-link"></ion-icon>
+        </ion-col>
+         Linked Issue Orders
+      </div>
+
+      <!--<div table-headers>-->
+        <!--<ion-row>-->
+          <!--<ion-col col-3><span class = "table-header">Issue Note No</span></ion-col>-->
+          <!--<ion-col col-2><span class = "table-header">Issue Type</span></ion-col>-->
+          <!--<ion-col col-2><span class = "table-header">Issue Qty</span></ion-col>-->
+          <!--<ion-col col-2><span class = "table-header">Issue Date</span></ion-col>-->
+          <!--<ion-col col-2><span class = "table-header">Status</span></ion-col>-->
+        <!--</ion-row>-->
+      <!--</div>-->
+
+      <table-row table-headers>
+        <ion-col col-3><span class = "table-header">Issue Note No</span></ion-col>
+        <ion-col col-2><span class = "table-header">Issue Type</span></ion-col>
+        <ion-col col-2><span class = "table-header">Issue Qty</span></ion-col>
+        <ion-col col-2><span class = "table-header">Issue Date</span></ion-col>
+        <ion-col col-2><span class = "table-header">Status</span></ion-col>
+      </table-row>
+
+      <!--<div table-data *ngFor="let issue of issueNotesOfHireOrder">-->
+        <!--<ion-row padding-top padding-bottom nowrap >-->
+          <!--<ion-col col-3><span class = "table-data">{{issue.Issue_Note_No}}</span></ion-col>-->
+          <!--<ion-col col-2><span class = "table-data">{{issue.Issue_Type}}</span></ion-col>-->
+          <!--<ion-col col-2><span class = "table-data">{{issue.Issue_Qty}}</span></ion-col>-->
+          <!--<ion-col col-2><span class = "table-data">{{issue.Issue_Date | date:"dd-MM-yyyy"}}</span></ion-col>-->
+          <!--<ion-col col-2><span class = "table-data">{{issue.Status}}</span></ion-col>-->
+        <!--</ion-row>-->
+      <!--</div>-->
+
+      <table-row table-data *ngFor="let issue of issueNotesOfHireOrder">
+        <table-data col-3><span>{{issue.Issue_Note_No}}</span></table-data>
+        <table-data col-2><span>{{issue.Issue_Type}}</span></table-data>
+        <table-data col-2><span>{{issue.Issue_Qty}}</span></table-data>
+        <table-data col-2><span>{{issue.Issue_Date | date:"dd-MM-yyyy"}}</span></table-data>
+        <table-data col-2><span>{{issue.Status}}</span></table-data>
+      </table-row>
+
+      <div table-mobile>
+        <ion-list>
+          <ion-row *ngFor="let issue of issueNotesOfHireOrder">
+              <ion-item>
+                <h2>{{ issue.Issue_Note_No }}</h2>
+                <h3>{{ issue.Issue_Qty}}</h3>
+                <p>{{issue.Status}}</p>
+                <ion-note item-right>
+                  {{issue.Issue_Date | date:"dd-MM-yyyy"}}
+                </ion-note>
+                <hr>
+              </ion-item>
+          </ion-row>
+        </ion-list>
+      </div>
+
+    </expandable-card>
+
+
+</ion-content>

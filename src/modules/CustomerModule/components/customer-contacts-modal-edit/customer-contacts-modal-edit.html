@@ -1,0 +1,68 @@
+<!-- Generated template for the CustomerContactsModalEditComponent component -->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</ion-header>
+
+<ion-content>
+
+
+<div id="tablet-ui" *ngIf="platform.is('tablet') || platform.is('core')" style="margin-bottom: 100px">
+
+<form [formGroup]="editCustomerContactForm" (ngSubmit) = "editCustomerContact(editCustomerContactForm.value)">
+  <ion-list>
+  <ion-row>
+    <ion-item>
+      <ion-label color="primary" stacked>Contact Name</ion-label>
+      <ion-input type="text" formControlName="Name"></ion-input>
+    </ion-item>
+  </ion-row>
+
+  <ion-row>
+    <ion-item>
+      <ion-label color="primary" stacked>Designation</ion-label>
+      <ion-input type="text" formControlName="Designation"></ion-input>
+    </ion-item>
+  </ion-row>
+
+  <ion-row>
+    <ion-item>
+      <ion-label color="primary" stacked>Office No</ion-label>
+      <ion-input type="text" formControlName="Office_No"></ion-input>
+    </ion-item>
+  </ion-row>
+
+  <ion-row>
+    <ion-item>
+      <ion-label color="primary" stacked>Handphone No</ion-label>
+      <ion-input type="text" formControlName="Handphone_No"></ion-input>
+    </ion-item>
+  </ion-row>
+
+  <ion-row>
+    <ion-item>
+      <ion-label color="primary" stacked>Fax No</ion-label>
+      <ion-input type="text" formControlName="Fax_No"></ion-input>
+    </ion-item>
+  </ion-row>
+  <ion-row>
+    <ion-item>
+      <ion-label color="primary" stacked>Email</ion-label>
+      <ion-input type="text" formControlName="Email"></ion-input>
+    </ion-item>
+  </ion-row>
+  <ion-input type="text" formControlName="CustomerContacts_ID" hidden></ion-input>
+  <ion-row>
+    <ion-col>
+        <button ion-button type="submit" [disabled]="editCustomerContactForm.invalid">Confirm</button>
+    </ion-col>
+    <ion-col>
+        <button ion-button type="button" (click) = "close()">Cancel</button>
+    </ion-col>
+  </ion-row>
+
+</ion-list>
+</form>
+
+</div>
+</ion-content>

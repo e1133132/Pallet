@@ -1,0 +1,7 @@
+<ion-list radio-group [(ngModel)]="filterData.selectedFilter">
+  <ion-list-header>{{ filterData.filterTitle? filterData.filterTitle : 'Filter' }}</ion-list-header>
+  <ion-item *ngFor="let filter of filterData.filters">
+    <ion-label>{{filter}}</ion-label>
+    <ion-radio value="{{filter}}" (ionSelect)="onChangeFilters()"></ion-radio>
+  </ion-item>
+</ion-list>

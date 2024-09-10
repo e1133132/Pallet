@@ -1,0 +1,60 @@
+<ion-card>
+  <ion-card-header>
+      <ion-row align-items-center>
+        <ion-col no-padding>
+          <ion-card-title>
+            <span class="card-title"><ng-content select="[card-title]"></ng-content></span>
+          </ion-card-title>
+        </ion-col>
+        <ion-col class="primary-actions" text-right>
+          <ng-content select="[primary-actions]">
+          </ng-content>
+          <button ion-button clear icon-only (click)="true">
+            <ion-icon name="funnel"></ion-icon>
+          </button>
+
+          <button ion-button clear icon-only (click)="onExpand()">
+            <ion-icon class="expand-icon" [class.expanded]="card.expended" name="arrow-dropdown"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+  </ion-card-header>
+
+  <expandable [expanded]="card.expended" [expandHeight]="3500" [expandTime]="0.375">
+    <!--<ion-card-content *ngIf="showSecondaries" class="secondaries">-->
+      <!--<ng-content select="[secondary-actions]"></ng-content>-->
+    <!--</ion-card-content>-->
+
+
+    <div class="details">
+      <ng-content select="[details]"></ng-content>
+    </div>
+
+    <table-row *ngIf="card.table" padding-left>
+      <ion-col col-1 *ngIf="card.table.displayCheckboxes">
+      </ion-col>
+      <table-header *ngFor="let header of displayColumns" name="{{header.displayName}}" id="{{header.name}}" [(orderedColumn)]="tableOrderedCol"></table-header>
+    </table-row>
+
+    <table-row *ngFor="let item of card.table.dataObjects" [class.selected]="false" padding-left>
+      <table-data text-center col-1 *ngIf="card.table.displayCheckboxes">
+        <ion-checkbox [checked]="false"
+                      (click)="true"></ion-checkbox>
+      </table-data>
+      <table-data *ngFor="let column of displayColumns">
+        <span>{{ item[column.name] }}</span>
+      </table-data>
+    </table-row>
+
+    <div #totals>
+      <ng-content select="[totals]"></ng-content>
+    </div>
+    <hr *ngIf="totals.children.length > 0"/>
+
+    <div class="pagination">
+      <table-pagination *ngIf="paginationData" [paginationData]="paginationData"
+                        (changePagination)="onChangePagination($event)"></table-pagination>
+    </div>
+
+  </expandable>
+</ion-card>

@@ -1,0 +1,22 @@
+<ion-menu [class]="selectedTheme">
+  <ion-header>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <ion-toolbar color="primary">
+      <ion-title>LHT Pallet Leasing</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item (click)="restart()">
+        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>Change Database
+      </button>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>{{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet [class]="selectedTheme"></ion-router-outlet>

@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngIf="selectedDBisMY" style="text-align: center">
+    <label style="font-size: 250%; width: 100%;">Welcome To LHP PMS (MY) Mobile</label>
+    <br>
+  </div>
+    <div *ngIf="selectedDBisSG" style="text-align: center">
+      <label style="font-size: 250%; width: 100%;">Welcome To KHL PMS (SG) Mobile</label>
+      <br>
+    </div>
+  <div *ngIf="!selectedDBisSG && !selectedDBisMY" style="text-align: center">
+    <label style="font-size: 250%; width: 100%;">Welcome To KHL PMS Mobile</label>
+    <br>
+  </div>
+  <ion-label text-center style="font-size: 150%; width: 100%;">User Logged In: {{username}}</ion-label>
+
+  <hr/>
+  <br>
+  <br>
+  <ion-grid>
+    <ion-row text-center>
+
+
+      <ion-col col-12 col-sm-6 col-md-4 col-lg-2>
+          <button large ion-button icon-only (click)="gotoPage(1)" style="font-size: xx-large; background-size:100% 100%">
+            <ion-icon ios="ios-people" md="md-people"></ion-icon>
+          </button>
+          <ion-label text-center style="font-size: large">Customers</ion-label>
+      </ion-col>
+
+      <!--<ion-col col-12 col-sm-6 col-md-4 col-lg-2>-->
+        <!--<button large ion-button icon-only (click)="gotoPage(1)" style="font-size: xx-large; background-size:100% 100%">-->
+          <!--<ion-icon ios="ios-people" md="md-people"></ion-icon>-->
+        <!--</button>-->
+      <!--</ion-col>-->
+
+      <ion-col col-12 col-sm-6 col-md-4 col-lg-2>
+        <button large ion-button  icon-only (click)="gotoPage(2)" style=" font-size: xx-large;background-size:100% 100%">
+          <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+        </button>
+        <ion-label text-center style="font-size: large">Hire Orders</ion-label>
+      </ion-col>
+
+      <ion-col col-12 col-sm-6 col-md-4 col-lg-2>
+        <button large ion-button (click)="gotoPage(3)" style="font-size: xx-large;background-size:100% 100%">
+          <ion-icon ios="ios-paper" md="md-paper"></ion-icon>
+        </button>
+        <ion-label text-center style="font-size: large">Issue Notes</ion-label>
+      </ion-col>
+
+      <ion-col col-12 col-sm-6 col-md-4 col-lg-2>
+        <button large ion-button (click)="gotoPage(4)" style="font-size: xx-large;background-size:100% 100%">
+          <img width="40" src="assets/imgs/retrieveBox_W.png">
+        </button>
+        <ion-label text-center style="font-size: large">Retrieve Notes</ion-label>
+      </ion-col>
+
+      <ion-col col-12 col-sm-6 col-md-4 col-lg-2>
+        <button large ion-button (click)="gotoPage(5)" style="font-size: xx-large;background-size: 100% 100%">
+          <!--<ion-icon ios="ios-home" md="md-home"></ion-icon>-->
+          <img style="width:45px;height:40px;" src="assets/imgs/pallet_W.png">
+        </button>
+        <ion-label text-center style="font-size: large">Pallet Inventory</ion-label>
+      </ion-col>
+
+      <ion-col col-12 col-sm-6 col-md-4 col-lg-2>
+        <button large ion-button (click)="logout()" style="font-size: xx-large;background-size: 100% 100%">
+          <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
+        </button>
+        <ion-label text-center style="font-size: large">Log Out</ion-label>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+
+</ion-content>

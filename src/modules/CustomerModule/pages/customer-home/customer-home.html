@@ -1,0 +1,373 @@
+<!--
+  Generated template for the CustomerHomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Customer Rental Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!--<ion-refresher (ionRefresh)="doRefresh($event)">-->
+    <!--<ion-refresher-content></ion-refresher-content>-->
+  <!--</ion-refresher>-->
+
+  <!--<div id="tablet-ui" *ngIf="platform.is('tablet') || platform.is('core')" style="margin-bottom: 100px">-->
+    <ion-row align-items-center>
+      <ion-col col-lg-10 col-md-6 col-sm-4>
+          <ion-searchbar #customerSearchBar (ionChange)="searchCustomer($event)" placeholder="Search Customers...">Search</ion-searchbar>
+      </ion-col>
+      <!--<ion-col>-->
+        <!--<button ion-button icon-only>-->
+          <!--<ion-icon name="settings"></ion-icon>-->
+        <!--</button>-->
+      <!--</ion-col>-->
+    </ion-row>
+
+    <expandable-card [initialExpand]="true" [expandHeight]="4500"
+                     [paginationData]="paginationData"
+                     (changePagination)="onChangePagination($event)">
+
+    <div card-title>
+      <ion-col col-1>
+        <ion-icon ios="ios-people" md="md-people"></ion-icon>
+      </ion-col>
+      <ion-col col-lg-6 col-sm-4>Customer Profile</ion-col>
+
+    </div>
+
+      <div primary-actions>
+      <button ion-button clear icon-only (click)="createCustomer()">
+        <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
+      </button>
+    </div>
+
+      <div secondary-data>
+
+        <button ion-button (click) = "retrieveCustomerExcel()">Export Customer List</button>
+      </div>
+
+      <div secondary-actions align-items-center>
+        <ion-row>
+          <ion-col col-lg-8 col-sm-4 align-items-end>
+            <button ion-button (click) = "showTotalHireQtyByCustomers(dt)">Export Total Hired Qty</button>
+          </ion-col>
+          <ion-col><ion-label>Select Date: </ion-label></ion-col>
+          <ion-col col-sm-2>
+            <ion-item>
+              <ion-datetime #chosenDate displayFormat="MMM-YYYY" [(ngModel)]="dt"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+
+        <table-row table-headers>
+          <ion-col col-1></ion-col>     <!--CheckBox Column-->
+          <table-header hidden col-1 name="Customer ID" id="customer_ID" [orderedColumn]="soTableOrderedCol" (order)="onChangeColumn($event)"></table-header>
+          <table-header col-1 name="Customer Code" id="Customer_Code" [orderedColumn]="soTableOrderedCol" (order)="onChangeColumn($event)"></table-header>
+          <table-header col-2 name="Customer Name" id="Customer_Name" [orderedColumn]="soTableOrderedCol" (order)="onChangeColumn($event)"></table-header>
+          <table-header col-3 name="Address" id="Address" [orderedColumn]="soTableOrderedCol" (order)="onChangeColumn($event)"></table-header>
+          <table-header col-1 name="Currency" id="Currency" [orderedColumn]="soTableOrderedCol" (order)="onChangeColumn($event)"></table-header>
+          <table-header col-1 name="GST" id="GST" [orderedColumn]="soTableOrderedCol" (order)="onChangeColumn($event)"></table-header>
+          <table-header col-1 name="Rental Qty" id="Rental_Qty" [orderedColumn]="soTableOrderedCol" (order)="onChangeColumn($event)"></table-header>
+          <table-header col-1 name="GST No." id="GLN_Code" [orderedColumn]="soTableOrderedCol" (order)="onChangeColumn($event)"></table-header>
+          <table-header col-1 name="Status" id="status" [orderedColumn]="soTableOrderedCol" (order)="onChangeColumn($event)"></table-header>
+        </table-row>
+
+      <!--<div table-data *ngFor="let c of customers" [class.selected]="isChecked(c)">-->
+          <!--<ion-row (click)="onCustomerClick(c)">-->
+            <!--<ion-col col-1 text-center>-->
+              <!--<ion-checkbox #customerCheckBox [(disabled)]="!isCustomerNotChecked && !customerCheckBox.checked" (ionChange)="openActionPanel(customerCheckBox, c)"></ion-checkbox>-->
+            <!--</ion-col>-->
+            <!--&lt;!&ndash;<ion-col hidden col-1 *ngIf="platform.isLandscape()"><span>{{ c.customer_ID }}</span></ion-col>&ndash;&gt;-->
+            <!--<ion-col col-1 *ngIf="platform.isLandscape()"><span>{{ c.Customer_Code }}</span></ion-col>-->
+            <!--<ion-col class = "table-data" col-2><span>{{ c.Customer_Name }}</span></ion-col>-->
+            <!--<ion-col col-3 class = "table-data" *ngIf="platform.isLandscape()"><span>{{ c.Address }}</span></ion-col>-->
+            <!--<ion-col col-1 class = "table-data" *ngIf="platform.isLandscape()"><span>{{ c.Currency }}</span></ion-col>-->
+            <!--<ion-col col-1 class = "table-data" *ngIf="platform.isLandscape()"><span>{{ c.GST }}</span></ion-col>-->
+            <!--<ion-col col-1 class = "table-data" *ngIf="platform.isLandscape()"><span>{{ c.Rental_Qty }}</span></ion-col>-->
+            <!--<ion-col col-1 class = "table-data" *ngIf="platform.isLandscape()"><span>{{ c.GLN_Code }}</span></ion-col>-->
+            <!--<ion-col col-1 class = "table-data" ><span>{{ c.status }}</span></ion-col>-->
+          <!--</ion-row>-->
+
+        <!--<hr/>-->
+      <!--</div>-->
+
+      <table-row table-data *ngFor="let c of customers" [class.selected]="isChecked(c)" (click)="onCustomerClick(c)">
+        <table-data text-center col-1>
+          <ion-checkbox #customerCheckBox [(disabled)]="!isCustomerNotChecked && !customerCheckBox.checked"
+                        (ionChange)="openActionPanel(customerCheckBox, c)"></ion-checkbox>
+        </table-data>
+        <table-data col-1><span>{{c.Customer_Code}}</span></table-data>
+        <table-data col-2><span>{{c.Customer_Name}}</span></table-data>
+        <table-data col-3><span>{{c.Address}}</span></table-data>
+        <table-data col-1><span>{{c.Currency}}</span></table-data>
+        <table-data col-1><span>{{c.GST}}</span></table-data>
+        <table-data col-1><span>{{c.Rental_Qty}}</span></table-data>
+        <table-data col-1><span>{{c.GLN_Code}}</span></table-data>
+        <table-data col-1><span>{{c.status}}</span></table-data>
+      </table-row>
+
+      <div table-mobile>
+        <ion-list>
+          <ion-item *ngFor="let c of customers">
+            <ion-checkbox #customerCheckBoxM item-left [(disabled)]="!isCustomerNotChecked && !customerCheckBox.checked"
+                          (click)="openActionPanel(customerCheckBoxM, c)"></ion-checkbox>
+            <ion-label tappable (click)="onCustomerClick(c)">
+              <h2>{{ c.Customer_Code }}</h2>
+              <p style="text-after-overflow: ellipsis">{{ c.Customer_Name}}</p>
+              <p>{{c.status}}</p>
+            </ion-label>
+            <!--<ion-note item-right>-->
+            <!--{{so.Order_Date | date: 'longDate'}}-->
+            <!--</ion-note>-->
+          </ion-item>
+
+        </ion-list>
+      </div>
+
+    </expandable-card>
+    <div id="bottom-bulk-action-panel" [ngClass]="{'hide-panel' : isCustomerNotChecked }">
+      <ion-row>
+        <ion-col col-8><p>Customer: <u>{{apCustName}}</u> is currently selected</p></ion-col>
+        <ion-col padding-right>
+          <button ion-button clear icon-only float-right color="light" (click)="presentContextMenu($event)">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+
+    <!--<ms-action-panel [expanded]="!isCustomerNotChecked"-->
+                     <!--(clickAction)="presentContextMenu($event)">-->
+      <!--<p>Selected</p>-->
+    <!--</ms-action-panel>-->
+
+  <!--</div>-->
+</ion-content>
+
+
+    <!--THIS WAS THE UI UNTIL 12/4/2018. IT HAS BEEN CHANGED-->
+    <!--<ion-card class="table-card">-->
+      <!--<ion-card-header>-->
+        <!--<ion-row align-items-center>-->
+          <!--<ion-col>-->
+            <!--<ion-card-title>-->
+              <!--Customer Rental Profile-->
+            <!--</ion-card-title>-->
+          <!--</ion-col>-->
+          <!--<ion-col text-right>-->
+            <!--&lt;!&ndash;<button ion-button clear icon-only (click)="createCustomer()">&ndash;&gt;-->
+              <!--&lt;!&ndash;<ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>&ndash;&gt;-->
+            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+            <!--&lt;!&ndash;<button ion-button (click) = "showTotalHireQtyByCustomers()">Print Qty</button>&ndash;&gt;-->
+            <!--<button ion-button clear icon-only>-->
+              <!--<ion-icon name="arrow-dropup"></ion-icon>-->
+            <!--</button>-->
+          <!--</ion-col>-->
+        <!--</ion-row>-->
+      <!--</ion-card-header>-->
+
+      <!--<hr>-->
+
+      <!--<ion-card-content>-->
+        <!--<ion-row align-items-center>-->
+          <!--<ion-col col-8>-->
+            <!--<ion-item>-->
+              <!--<ion-searchbar #customerSearchBar (ionInput)="searchCustomer($event)" placeholder="Search Customers...">Search</ion-searchbar>-->
+            <!--</ion-item>-->
+          <!--</ion-col >-->
+          <!--<ion-col text-right>-->
+            <!--<button ion-button clear icon-only (click)="createCustomer()">-->
+              <!--<ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>-->
+            <!--</button>-->
+            <!--<button ion-button (click) = "showTotalHireQtyByCustomers()">Print Qty</button>-->
+          <!--</ion-col>-->
+        <!--</ion-row>-->
+      <!--</ion-card-content>-->
+
+      <!--<hr>-->
+
+      <!--<div class="table">-->
+        <!--<ion-row padding-bottom padding-top>-->
+          <!--<ion-col><span class="table-header">CheckBox</span></ion-col>-->
+          <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-header">Customer Code</span></ion-col>-->
+          <!--<ion-col col-3><span class="table-header">Customer Name</span></ion-col>-->
+          <!--<ion-col col-4 *ngIf="platform.isLandscape()"><span class="table-header">Address</span></ion-col>-->
+          <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-header">Currency</span></ion-col>-->
+          <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-header">GST</span></ion-col>-->
+          <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-header">Rental Qty</span></ion-col>-->
+          <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-header">GST No.</span></ion-col>-->
+          <!--<ion-col><span class="table-header">Status</span></ion-col>-->
+        <!--</ion-row>-->
+
+        <!--<hr/>-->
+
+        <!--<div *ngFor="let c of customers" [style.background-color]="isChecked(c)? '#F5F5F5': ''">-->
+          <!--<ion-row padding-top padding-bottom nowrap (click)="onExpend(c)">-->
+            <!--<ion-col text-center>-->
+              <!--<ion-checkbox #customerCheckBox [(disabled)]="!isCustomerNotChecked && !customerCheckBox.checked" (ionChange)="openActionPanel(customerCheckBox, c)"></ion-checkbox>-->
+            <!--</ion-col>-->
+            <!--<ion-col *ngIf="platform.isLandscape()">-->
+            <!--<span class="table-data">{{ c.Customer_Code }}</span>-->
+            <!--</ion-col>-->
+            <!--<ion-col col-3>-->
+              <!--<span class="table-data">{{ c.Customer_Name }}</span>-->
+            <!--</ion-col>-->
+            <!--<ion-col col-4 *ngIf="platform.isLandscape()">-->
+              <!--<span class="table-data">{{ c.Address }}</span>-->
+            <!--</ion-col>-->
+            <!--<ion-col *ngIf="platform.isLandscape()">-->
+              <!--<span class="table-data">{{ c.Currency }}</span>-->
+            <!--</ion-col>-->
+            <!--<ion-col *ngIf="platform.isLandscape()">-->
+              <!--<span class="table-data">{{ c.GST }}</span>-->
+            <!--</ion-col>-->
+            <!--<ion-col *ngIf="platform.isLandscape()">-->
+              <!--<span class="table-data">{{ c.Rental_Qty }}</span>-->
+            <!--</ion-col>-->
+            <!--<ion-col *ngIf="platform.isLandscape()">-->
+              <!--<span class="table-data">{{ c.GLN_Code }}</span>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+              <!--<span class="table-data">{{ c.status }}</span>-->
+            <!--</ion-col>-->
+          <!--</ion-row>-->
+
+          <!--<expandable [expanded]="c.expanded" [expandHeight]="300">-->
+
+            <!--&lt;!&ndash;CUSTOMER CONTACTS IN MORE DETAILS&ndash;&gt;-->
+            <!--<div class="table">-->
+              <!--<ion-row padding-top>-->
+                <!--<ion-col><span class="table-header"  style="font-size: large; text-decoration: underline">Contact Persons</span></ion-col>-->
+                <!--<ion-col text-right>-->
+                  <!--<button ion-button type="button" (click)="goToCustomerContact(c)"><ion-icon name="create"></ion-icon></button>-->
+                <!--</ion-col>-->
+              <!--</ion-row>-->
+              <!--<ion-row>-->
+                <!--<ion-col><span class="table-header">Name</span></ion-col>-->
+                <!--<ion-col><span class="table-header">Designation</span></ion-col>-->
+                <!--<ion-col><span class="table-header">Office No.</span></ion-col>-->
+                <!--<ion-col><span class="table-header">Handphone No.</span></ion-col>-->
+                <!--<ion-col><span class="table-header">Fax No.</span></ion-col>-->
+                <!--<ion-col><span class="table-header">Email</span></ion-col>-->
+              <!--</ion-row>-->
+
+              <!--<div *ngFor="let cc of customerContact">-->
+                <!--<ion-row padding-top padding-bottom nowrap>-->
+                  <!--<ion-col><span class="table-data">{{ cc.Name }}</span></ion-col>-->
+                  <!--<ion-col><span class="table-data">{{ cc.Designation }}</span></ion-col>-->
+                  <!--<ion-col><span class="table-data">{{ cc.Office_No }}</span></ion-col>-->
+                  <!--<ion-col><span class="table-data">{{ cc.Handphone_No }}</span></ion-col>-->
+                  <!--<ion-col><span class="table-data">{{ cc.Fax_No }}</span></ion-col>-->
+                  <!--<ion-col><span class="table-data">{{ cc.Email }}</span></ion-col>-->
+                <!--</ion-row>-->
+
+              <!--</div>-->
+            <!--</div>-->
+
+            <!--<hr/>-->
+
+            <!--&lt;!&ndash;CUSTOMER RENTAL STATUS IN MORE DETAILS&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="table">&ndash;&gt;-->
+              <!--&lt;!&ndash;<ion-row padding-top>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-col><span class="table-header"  style="font-size: large; text-decoration: underline">Rental Status</span></ion-col>&ndash;&gt;-->
+              <!--&lt;!&ndash;</ion-row>&ndash;&gt;-->
+              <!--&lt;!&ndash;<ion-row>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-col><span class="table-header">Status</span></ion-col>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-col><span class="table-header">Date</span></ion-col>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-col><span class="table-header">Ref No.</span></ion-col>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-col><span class="table-header">Issue Qty</span></ion-col>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-col><span class="table-header">Return Qty</span></ion-col>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-col><span class="table-header">Balance Qty (Month End)</span></ion-col>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-col><span class="table-header">Remarks</span></ion-col>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-col><span class="table-header">Pallet Type</span></ion-col>&ndash;&gt;-->
+              <!--&lt;!&ndash;</ion-row>&ndash;&gt;-->
+
+              <!--&lt;!&ndash;<div *ngFor="let rs of customerRentalStatus">&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-row padding-top padding-bottom nowrap>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<ion-col><span class="table-data">{{ rs.Status }}</span></ion-col>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<ion-col><span class="table-data">{{ rs.Date }}</span></ion-col>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<ion-col><span class="table-data">{{ rs.Ref_No_}}</span></ion-col>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<ion-col><span class="table-data">{{ rs.Issue_Qty }}</span></ion-col>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<ion-col><span class="table-data">{{ rs.Return_Qty }}</span></ion-col>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<ion-col><span class="table-data">{{ rs.Balance_Qty }}</span></ion-col>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<ion-col><span class="table-data">{{ rs.Remarks }}</span></ion-col>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<ion-col><span class="table-data">{{ getPalletType(rs.Pallet_Profile_ID) }}</span></ion-col>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ion-row>&ndash;&gt;-->
+
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--</expandable>-->
+
+          <!--<hr/>-->
+
+
+        <!--</div>-->
+
+        <!--<div class="pagination">-->
+
+          <!--<ion-row nowrap>-->
+            <!--<ion-col col-sm-3 col-md-3 col-lg-6>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+              <!--<ion-item text-right>-->
+                <!--<ion-label>Rows per page:</ion-label>-->
+                <!--<ion-select>-->
+                  <!--<ion-option selected="true">10</ion-option>-->
+                  <!--<ion-option>20</ion-option>-->
+                  <!--<ion-option>30</ion-option>-->
+                  <!--<ion-option>40</ion-option>-->
+                  <!--<ion-option>50</ion-option>-->
+                <!--</ion-select>-->
+              <!--</ion-item>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+              <!--<ion-item text-right>-->
+                <!--<ion-note>1-10 of 1680</ion-note>-->
+              <!--</ion-item>-->
+            <!--</ion-col>-->
+            <!--<ion-col text-right>-->
+              <!--<button ion-button clear>-->
+                <!--<ion-icon name="arrow-back"></ion-icon>-->
+              <!--</button>-->
+              <!--<button ion-button clear>-->
+                <!--<ion-icon name="arrow-forward"></ion-icon>-->
+              <!--</button>-->
+            <!--</ion-col>-->
+          <!--</ion-row>-->
+
+        <!--</div>-->
+
+
+      <!--</div>-->
+
+    <!--</ion-card>-->
+
+
+  <!--</div>-->
+
+  <!--<div id="bottom-bulk-action-panel" [ngClass]="{'hide-panel' : isCustomerNotChecked }">-->
+    <!--<ion-row>-->
+      <!--<ion-col><p> Selected</p></ion-col>-->
+      <!--<ion-col padding-right>-->
+        <!--<button ion-button clear icon-only float-right color="light" (click)="presentContextMenu($event)">-->
+          <!--<ion-icon name="more"></ion-icon>-->
+        <!--</button>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</div>-->
+<!--</ion-content>-->
+
+
+

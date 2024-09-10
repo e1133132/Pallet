@@ -1,0 +1,120 @@
+<!--
+  Generated template for the CustomerManageContactsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!--<ion-navbar color="primary"></ion-navbar>-->
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div id="tablet-ui" *ngIf="platform.is('tablet') || platform.is('core')" style="margin-bottom: 10px">
+
+    <expandable-card [initialExpand]="true" [expandHeight]="900"
+                                          [paginationData]="paginationData"
+                                          (changePagination)="onChangePagination($event)">
+
+      <div card-title>Manage Contacts</div>
+
+      <div primary-actions><button ion-button (click)="goToCreateCustomerContact()">Create Contact</button></div>
+
+      <hr>
+
+      <div table-headers>
+        <ion-row padding-bottom padding-top>
+          <ion-col col-1><span>Options</span></ion-col>
+          <ion-col><span>Name</span></ion-col>
+          <ion-col *ngIf="platform.isLandscape()"><span>Designation</span></ion-col>
+          <ion-col><span>Office No</span></ion-col>
+          <ion-col><span>Handphone No.</span></ion-col>
+          <ion-col *ngIf="platform.isLandscape()"><span>Fax No.</span></ion-col>
+          <ion-col *ngIf="platform.isLandscape()"><span>Email</span></ion-col>
+        </ion-row>
+      </div>
+
+      <div table-data *ngFor = "let cc of customerContacts, index as i">
+        <ion-row padding-top padding-bottom nowrap>
+          <ion-col col-1>
+            <button ion-button icon-only (click)="showContactOptions($event, i)" style="background: transparent ;color: black; border: none">
+              <ion-icon name= "more"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col><span>{{cc.Name}}</span></ion-col>
+          <ion-col *ngIf="platform.isLandscape()"><span>{{cc.Designation}}</span></ion-col>
+          <ion-col><span>{{cc.Office_No}}</span></ion-col>
+          <ion-col><span>{{cc.Handphone_No}}</span></ion-col>
+          <ion-col *ngIf="platform.isLandscape()"><span>{{cc.Fax_No}}</span></ion-col>
+          <ion-col *ngIf="platform.isLandscape()"><span>{{cc.Email}}</span></ion-col>
+        </ion-row>
+      </div>
+
+
+    </expandable-card>
+
+
+    <!--<ion-card class="table-card">-->
+      <!--<ion-card-header>-->
+        <!--<ion-row align-items-center>-->
+          <!--<ion-col>-->
+            <!--<ion-card-title>-->
+              <!--Manage Contacts-->
+            <!--</ion-card-title>-->
+          <!--</ion-col>-->
+          <!--<ion-col text-right>-->
+            <!--<button ion-button (click)="goToCreateCustomerContact()">Create Contact</button>-->
+          <!--</ion-col>-->
+        <!--</ion-row>-->
+      <!--</ion-card-header>-->
+
+      <!--<hr/>-->
+
+      <!--<ion-card-content>-->
+
+        <!--<div class="table">-->
+          <!--<ion-row padding-bottom padding-top>-->
+            <!--<ion-col col-1><span class="table-header">Options</span></ion-col>-->
+            <!--<ion-col><span class="table-header">Name</span></ion-col>-->
+            <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-header">Designation</span></ion-col>-->
+            <!--<ion-col><span class="table-header">Office No</span></ion-col>-->
+            <!--<ion-col><span class="table-header">Handphone No.</span></ion-col>-->
+            <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-header">Fax No.</span></ion-col>-->
+            <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-header">Email</span></ion-col>-->
+          <!--</ion-row>-->
+
+
+          <!--<hr/>-->
+
+          <!--<div *ngFor = "let cc of customerContacts, index as i">-->
+            <!--<ion-row padding-top padding-bottom nowrap>-->
+              <!--<ion-col col-1>-->
+                <!--<button ion-button icon-only (click)="showContactOptions($event, i)" style="background: transparent ;color: black; border: none">-->
+                  <!--<ion-icon name= "more"></ion-icon>-->
+                <!--</button>-->
+              <!--</ion-col>-->
+              <!--<ion-col><span class="table-data">{{cc.Name}}</span></ion-col>-->
+              <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-data">{{cc.Designation}}</span></ion-col>-->
+              <!--<ion-col><span class="table-data">{{cc.Office_No}}</span></ion-col>-->
+              <!--<ion-col><span class="table-data">{{cc.Handphone_No}}</span></ion-col>-->
+              <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-data">{{cc.Fax_No}}</span></ion-col>-->
+              <!--<ion-col *ngIf="platform.isLandscape()"><span class="table-data">{{cc.Email}}</span></ion-col>-->
+            <!--</ion-row>-->
+          <!--</div>-->
+
+
+        <!--</div>-->
+
+      <!--</ion-card-content>-->
+
+    <!--</ion-card>-->
+
+
+  </div>
+</ion-content>

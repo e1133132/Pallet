@@ -1,0 +1,34 @@
+<!--
+  Generated template for the HireOrderLinkedIssueOrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Linked Issue Orders List</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Issue Note No</ion-col>
+      <ion-col>Issue Type</ion-col>
+      <ion-col>Issue Qty</ion-col>
+      <ion-col>Issue Date</ion-col>
+      <ion-col>Status</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let issue of issueNotesOfHireOrder">
+      <ion-col>{{issue.Issue_Note_No}}</ion-col>
+      <ion-col>{{issue.Issue_Type}}</ion-col>
+      <ion-col>{{issue.Issue_Qty}}</ion-col>
+      <ion-col>{{issue.Issue_Date | date: "dd-MM-yyyy"}}</ion-col>
+      <ion-col>{{issue.Status}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

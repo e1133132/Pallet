@@ -1,0 +1,56 @@
+ms-action-panel {
+
+  /* Small devices (portrait tablets and large phones, 768px and down) */
+  @media only screen and (max-width: 768px) {
+    .msap{
+      left: 0;
+      right: 0;
+    }
+  }
+
+  /* Medium devices and bigger (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    .msap{
+      left: 50px;
+      right: 50px;
+    }
+  }
+
+  .msap{
+    position: fixed;
+    //left: 50px;
+    //right: 50px;
+    bottom: 0px;
+    top: auto;
+
+    padding: 0;
+    margin: 0;
+
+    -webkit-transition: transform 0.375s;
+    -moz-transition: transform 0.375s;
+    -ms-transition: transform 0.375s;
+    -o-transition: transform 0.375s;
+    transition: transform 0.375s;
+
+    p {
+      padding-left: 30px;
+      display: inline-block;
+    }
+  }
+
+  .msap.hide-panel {
+    -webkit-transform: translateY(110%);
+    -moz-transform: translateY(110%);
+    -ms-transform: translateY(110%);
+    -o-transform: translateY(110%);
+    transform: translateY(110%);
+  }
+
+  .show-more-wrapper{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: block;
+  }
+}

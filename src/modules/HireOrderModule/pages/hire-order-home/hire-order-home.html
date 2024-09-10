@@ -1,0 +1,146 @@
+<!--
+  Generated template for the HireOrderHomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Hire Orders</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row align-items-center>
+    <ion-col col-lg-10 col-md-6 col-sm-4>
+      <ion-searchbar #hireOrderSearchBar (ionChange)="searchHireOrders($event)" placeholder="Search Hire Orders...">Search</ion-searchbar>
+    </ion-col>
+  </ion-row>
+
+  <expandable-card [initialExpand]="true" [expandHeight]="4500"
+                   [paginationData]="paginationDataHO"
+                   (changePagination)="onChangePaginationOrColumnHO($event)">
+
+    <div card-title>
+      <ion-col col-1>
+        <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+      </ion-col>
+      Hire Orders
+    </div>
+
+    <div primary-actions>
+      <button ion-button clear icon-only (click)="goToCreateHireOrder()">
+        <ion-icon ios="ios-create" md="md-create"></ion-icon>
+      </button>
+    </div>
+
+    <!--<div table-headers>-->
+      <!--<ion-row padding-bottom padding-top>-->
+        <!--<ion-col col-1></ion-col>-->
+        <!--<table-header col-1 name="Hire Order No" id="Hire_Order_No" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>-->
+        <!--<table-header col-2 name="Customer" id="Customer_Name" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>-->
+        <!--<table-header col-1 name="Qty" id="Qty" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>-->
+        <!--<table-header col-1 name="Pallet Type" id="Pallet_Type" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>-->
+        <!--<table-header col-1 name="Hire_Date" id="Hire_Date" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>-->
+        <!--<table-header col-1 name="Expected Issue Date" id="Expected_Issue_Date" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>-->
+        <!--<table-header col-1 name="Delivery Type" id="Delivery_Type" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>-->
+        <!--<table-header col-1 name="Delivery Address" id="Delivery_Address" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>-->
+        <!--<table-header col-1 name="Status" id="Status" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>-->
+        <!--<table-header col-1 name="Advance Order" id="Advance_Order_No" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>-->
+      <!--</ion-row>-->
+    <!--</div>-->
+
+    <table-row table-headers>
+      <ion-col col-1></ion-col>
+      <table-header col-1 name="Hire Order No" id="Hire_Order_No" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>
+      <table-header col-2 name="Customer" id="Customer_Name" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>
+      <table-header col-1 name="Qty" id="Qty" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>
+      <table-header col-1 name="Pallet Type" id="Pallet_Type" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>
+      <table-header col-1 name="Hire Date" id="Hire_Date" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>
+      <table-header col-1 name="Expected Issue Date" id="Expected_Issue_Date" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>
+      <table-header col-1 name="Delivery Type" id="Delivery_Type" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>
+      <table-header col-1 name="Delivery Address" id="Delivery_Address" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>
+      <table-header col-1 name="Status" id="Status" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>
+      <table-header col-1 name="Advance Order" id="Advance_Order_No" [orderedColumn]="hoTableOrderedCol" (order)="onChangePaginationOrColumnHO($event)"></table-header>
+    </table-row>
+
+    <!--<div table-data *ngFor="let ho of allHireOrders, index as i" [class.selected]="isChecked(ho)">-->
+      <!--<ion-row (click)="onHireOrderClick(ho)">-->
+        <!--<ion-col col-1 text-center>-->
+          <!--<ion-checkbox #hireOrderCheckBox [(disabled)]="!isHireOrderNotChecked && !hireOrderCheckBox.checked"-->
+                        <!--(ionChange)="openActionPanel(hireOrderCheckBox, ho)">-->
+          <!--</ion-checkbox>-->
+        <!--</ion-col>-->
+
+        <!--<ion-col col-1><span class="table-data">{{ho.Hire_Order_No}}</span></ion-col>-->
+        <!--<ion-col col-2><span class="table-data">{{ho.Customer_Name}}</span></ion-col>-->
+        <!--<ion-col col-1><span class="table-data">{{ho.Qty}}</span></ion-col>-->
+        <!--<ion-col col-1><span class="table-data">{{ho.Pallet_Type}}</span></ion-col>-->
+        <!--<ion-col col-1><span class="table-data">{{ho.Hire_Date | date:"dd-MM-yyyy"}}</span></ion-col>-->
+        <!--<ion-col col-1><span class="table-data">{{ho.Expected_Issue_Date | date:"dd-MM-yyyy"}}</span></ion-col>-->
+        <!--<ion-col col-1><span class="table-data">{{ho.Delivery_Type}}</span></ion-col>-->
+        <!--<ion-col col-1><span class="table-data">{{ho.Delivery_Address}}</span></ion-col>-->
+        <!--<ion-col col-1><span class="table-data">{{ho.Status}}</span></ion-col>-->
+        <!--<ion-col col-1><span class="table-data">{{ho.Advance_Order_No}}</span></ion-col>-->
+      <!--</ion-row>-->
+    <!--</div>-->
+
+    <table-row table-data *ngFor="let ho of allHireOrders, index as i" [class.selected]="isChecked(ho)" (click)="onHireOrderClick(ho)">
+      <table-data col-1 text-center>
+        <ion-checkbox #hireOrderCheckBox [(disabled)]="!isHireOrderNotChecked && !hireOrderCheckBox.checked"
+                      (ionChange)="openActionPanel(hireOrderCheckBox, ho)">
+        </ion-checkbox>
+      </table-data>
+      <table-data col-1><span>{{ho.Hire_Order_No}}</span></table-data>
+      <table-data col-2><span>{{ho.Customer_Name}}</span></table-data>
+      <table-data col-1><span>{{ho.Qty}}</span></table-data>
+      <table-data col-1><span>{{ho.Pallet_Type}}</span></table-data>
+      <table-data col-1><span>{{ho.Hire_Date | date:"dd-MM-yyyy"}}</span></table-data>
+      <table-data col-1><span>{{ho.Expected_Issue_Date | date:"dd-MM-yyyy"}}</span></table-data>
+      <table-data col-1><span>{{ho.Delivery_Type}}</span></table-data>
+      <table-data col-1><span>{{ho.Delivery_Address}}</span></table-data>
+      <table-data col-1><span>{{ho.Status}}</span></table-data>
+      <table-data col-1><span>{{ho.Advance_Order_No}}</span></table-data>
+    </table-row>
+
+    <div table-mobile>
+      <ion-list>
+        <ion-item *ngFor="let ho of allHireOrders, index as i" >
+          <ion-checkbox #hireOrderCheckBox [(disabled)]="!isHireOrderNotChecked && !hireOrderCheckBox.checked"
+                        (ionChange)="openActionPanel(hireOrderCheckBox, ho)">
+          </ion-checkbox>
+          <ion-label tappable (click)="onHireOrderClick(ho)">
+            <h2>{{ ho.Hire_Order_No }}</h2>
+            <h3>{{ ho.Customer_Name}}</h3>
+            <p>{{ho.Status}}</p>
+          </ion-label>
+          <ion-note item-right>
+          {{ho.Hire_Date | date:"dd-MM-yyyy"}}
+          </ion-note>
+        </ion-item>
+
+      </ion-list>
+    </div>
+
+
+  </expandable-card>
+
+  <div id="bottom-bulk-action-panel" [ngClass]="{'hide-panel' : isHireOrderNotChecked }">
+    <ion-row>
+      <ion-col col-8><p>Hire Order<u>{{hoHireOrder}}</u> is currently selected</p></ion-col>
+      <ion-col padding-right>
+        <button ion-button clear icon-only float-right color="light" (click)="openHireOrderContextMenu($event)">
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

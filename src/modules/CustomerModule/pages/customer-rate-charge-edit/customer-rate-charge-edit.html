@@ -1,0 +1,77 @@
+<!--
+  Generated template for the CustomerRateChargeEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <ion-navbar color="primary">
+      <ion-title>Edit Rate Charge</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <expandable-card [initialExpand]="true" [expandHeight]="3400">
+
+      <div card-title>
+        <ion-col col-1>
+          <ion-icon ios="ios-color-wand" md="md-color-wand"></ion-icon>
+        </ion-col>Edit Rate Charge</div>
+
+      <div table-data>
+        <form [formGroup]="editCustomerRateChargeForm" (ngSubmit) = "editCustomerRateCharge(editCustomerRateChargeForm.value)">
+          <ion-list>
+            <ion-item>
+              <ion-label stacked>ChargeRate ID</ion-label>
+              <ion-input type="number" formControlName="ChargeRate_ID" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Customer ID</ion-label>
+              <ion-input type="number" formControlName="Customer_ID" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Pallet Type *required</ion-label>
+              <ion-select formControlName="Pallet_Profile_ID">
+                <ion-option *ngFor = "let pt of palletTypes" [value]="pt.Pallet_Profile_ID">{{pt.Pallet_Type}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Rental Rate</ion-label>
+              <ion-input formControlName="Rental_Rate"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Dehire Charge</ion-label>
+              <ion-input type="float" formControlName="Dehire_Charge"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Admin Charge</ion-label>
+              <ion-input type="float" formControlName="Admin_Charge"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Tpn Charge</ion-label>
+              <ion-input type="float" formControlName="Tpn_Charge"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Effective Date *required</ion-label>
+              <ion-datetime formControlName="Effective_Date"></ion-datetime>
+            </ion-item>
+            <ion-row>
+              <ion-col>
+                <button ion-button type="submit" [disabled]="!editCustomerRateChargeForm.valid">Confirm</button>
+              </ion-col>
+              <ion-col>
+                <button ion-button type="button" (click) = "close()">Cancel</button>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+
+        </form>
+      </div>
+
+    </expandable-card>
+
+</ion-content>

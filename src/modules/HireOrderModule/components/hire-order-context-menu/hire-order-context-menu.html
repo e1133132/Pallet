@@ -1,0 +1,8 @@
+<!-- Generated template for the HireOrderContextMenuComponent component -->
+<ion-list>
+  <ion-row>
+    <button ion-item *ngIf="hireOrder.Status=='New'" (click)="releaseHO(hireOrder.Hire_Order_ID)">Release Hire Order</button>
+    <button ion-item *ngIf="hireOrder.Status=='New'" (click)="deleteHireOrder(hireOrder.Hire_Order_ID)">Delete/Remove Hire Order</button>
+    <button ion-item *ngIf="hireOrder.Status!='New'" disabled>Delete/Remove Hire Order</button>
+  </ion-row>
+</ion-list>

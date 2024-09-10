@@ -1,0 +1,7 @@
+<ion-list>
+  <ion-item>
+    <ion-input placeholder="Search" type="text" [(ngModel)]="value" (ngModelChange)="onInputData()"  ></ion-input>
+    <!--<ion-searchbar [(ngModel)]="value" (ionInput)="onInputData()"></ion-searchbar>-->
+  </ion-item>
+  <button *ngFor="let item of itemList" ion-item (click)="onSelectItem(item)">{{item}}</button>
+</ion-list>

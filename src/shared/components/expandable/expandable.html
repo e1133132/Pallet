@@ -1,0 +1,5 @@
+<div #expandWrapper class='expand-wrapper' [class.collapsed]="!expanded">
+  <div *ngIf="delayExpand">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<!-- Generated template for the HireOrderCreateComponent component -->
+<ion-header>Create New Hire Order</ion-header>
+<ion-content>
+  <form [formGroup]="createHireOrderForm" (ngSubmit) = "createHireOrder(createHireOrderForm.value)">
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Hire Order No</ion-label>
+        <ion-input type = "text" [disabled]="true" formControlName="Hire_Order_No" ></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Choose Customer</ion-label>
+        <ion-input #customerInput type = "text" formControlName="Customer_ID" (ionFocus)="openHireOrderSelectCustomerPopOver($event)"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Customer Name</ion-label>
+        <ion-input #customerName type = "text" formControlName="Customer_Name" [disabled]="true"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Quantity</ion-label>
+        <ion-input type = "number" formControlName="Qty" ></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Pallet Type</ion-label>
+        <ion-select type = "text" formControlName="Pallet_Profile_ID">
+          <ion-option *ngFor="let pallet of allPallets" [value]="pallet.Pallet_Profile_ID">{{pallet.Pallet_Type}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Date of Hire</ion-label>
+        <ion-datetime displayFormat="DD-MMM-YYYY" formControlName="Hire_Date"></ion-datetime>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Expected Issue Date</ion-label>
+        <ion-datetime displayFormat="DD-MMM-YYYY" formControlName="Expected_Issue_Date"></ion-datetime>
+       </ion-item>
+   </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Delivery Type</ion-label>
+        <ion-select formControlName="Delivery_Type">
+          <ion-option value= "Self Collection">Self Collection</ion-option>
+          <ion-option value="Delivery">Delivery</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Delivery Address</ion-label>
+        <ion-input #custDeliveryAdd type ="text" formControlName="Delivery_Address" disabled></ion-input>     <!-- this is assuming that Customer Shipping Address and Billing Address are the same-->
+      </ion-item>
+    </ion-row>
+    <ion-row>
+    <ion-item>
+      <ion-label stacked>Status</ion-label>
+      <ion-input type ="text" formControlName="Status" disabled></ion-input>
+      <!--<ion-select formControlName="Status">-->
+        <!--<ion-option value= "New">New</ion-option>-->
+        <!--<ion-option value="Hold">Hold</ion-option>-->
+        <!--<ion-option value= "Released">Released</ion-option>-->
+        <!--<ion-option value="Completed">Completed</ion-option>-->
+      <!--</ion-select>-->
+    </ion-item>
+  </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Advance Order</ion-label>
+        <ion-input type ="text" formControlName="Advance_Order"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-col><button ion-button type="submit">Create Hire Order</button>
+      </ion-col>
+      <ion-col><button ion-button type="reset">Reset Order</button></ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>
